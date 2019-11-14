@@ -9,7 +9,6 @@ For information on the training, see the website
 
 1. [`scientific_python.pptx`](scientific_python.pptx): PowerPoint
    presentation used for the training.
-1. [`hands-on`](hands-on): directory that contains material for the hands-on sessions.
 1. [`source-code`](source-code): directory that contains sample code written to
    develop the slides and illustrate concepts.
 1. [License](LICENSE): license information for the material in this repository.
