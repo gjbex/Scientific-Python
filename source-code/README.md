@@ -6,19 +6,19 @@ to create it.  There is some material not covered in the presentation as well.
 ## Requirements
 
 * Python version: at least 3.6
-* Packages:
+* Packages (names listed taht can be used with `pip` or `conda` to install):
   * numpy
   * scipy
   * matplotlib
   * bokeh
   * sympy
   * pytables
-  * skimage
-  * Jupyter notebook
+  * scikit-image
+  * jupyter
   * ipywidgets
 * Optional packages
   * opencv
-  * mumexpr
+  * numexpr
   * pandas
 
 ## What is it?
