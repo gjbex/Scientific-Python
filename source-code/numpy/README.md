@@ -27,6 +27,8 @@ algorithms for scientific computing (Lapack, statistics,...).
     numexpr module.
 1. `numpy.ipynb`: Jupyter notebook illustrating some numpy aspects like
     array slicing, adding dimension to arrays, and so on.
+1. `structured_arrays.ipynb`: Jupyter notebook illustration creating of and
+   working with structured numpy arrays.
 1. `optimization.py`: illustration of how to use the `scipy.optimize` for
     unconstrained multivariate optimization
 1. `target_function_plot.py`: script that creates a surface plot of the
