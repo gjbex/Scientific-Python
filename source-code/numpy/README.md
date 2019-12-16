@@ -27,6 +27,7 @@ algorithms for scientific computing (Lapack, statistics,...).
     numexpr module.
 1. `numpy.ipynb`: Jupyter notebook illustrating some numpy aspects like
     array slicing, adding dimension to arrays, and so on.
+1. `indexing_arrays.ipynb`: indexing using `...`, `np.newaxis`
 1. `structured_arrays.ipynb`: Jupyter notebook illustration creating of and
    working with structured numpy arrays.
 1. `optimization.py`: illustration of how to use the `scipy.optimize` for
