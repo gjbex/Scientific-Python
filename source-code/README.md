@@ -34,3 +34,5 @@ to create it.  There is some material not covered in the presentation as well.
 * [`matrices`](matrices): some numpy illustrations.
 * [`numpy`](numpy): some numpy and scipy illustrations.
 * [`sympy`](sympy): some illustrations of doing symbolic computations using sympy.
+* [`xarray`](xarray): introduction to `xarray`, a library for indexed, labeled
+  N-dimensional arrays.
