@@ -26,3 +26,4 @@ What is it?
     dataset, useful to experiment with various forms of reading the data
 1. `read_large_dataset.py`: script to experiment with various read modes,
     reading an entire dataset, reading non-contiguous rows and columns
+1. `h5py.ipynb`: Jupyter notebook illustrating the h5py package.

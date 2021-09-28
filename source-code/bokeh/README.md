@@ -3,6 +3,10 @@ Bokeh is a library to create interactive plots easily from a number of
 programming languages, including Python.  The result is saved to an HTML
 page that can be viewed with any modern browser.
 
+Note: out of the box, these notebooks work with Jupyter Notebook, *not*
+Jupyter Lab!
+
+
 ## What is it?
 1. `bokeh_intro.ipynb`: Jupyter notebook showing some basic plotting
     capabilities of Bokeh.
