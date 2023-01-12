@@ -1,0 +1,13 @@
+name: vpython
+channels:
+  - defaults
+dependencies:
+  - vpython
+  - jupyterlab
+  - jupyterlab-vpython
+  - numpy
+  - scipy
+  - sympy
+  - matplotlib
+  - ipywidgets
+prefix: /home/gjb/miniconda3/envs/vpython
