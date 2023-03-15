@@ -15,8 +15,16 @@ Jupyter Lab!
 1. `HIVseries.csv`: data set to use with `viral_load.py`.
 1. `ising.py`: Visualizes the graphical solution to the equation of the
     magnetization of the 2D Ising model in the mean field approximation.
-    The temperature (i.e., beta = 1/T) can be varied using a slider.
+    The temperature (i.e., beta = 1/T) can be varied using a slider. *Note:*
+    this is intended to be run using Bokeh server, see below.
 1. `pendulum.ipynb`: Jupyter notebook illustrating interactive plots with
     widgets, linked plots and a hover tool.
 1. `viral_load.ipynb`: Jupyter notebook to interactively adjust the
     parameters of a model for HIV viral load to fit experimental data.
+
+## How to use it?
+
+To use `ising.py`, run it with the Bokeh server, i.e.,
+```bash
+$ bokeh serve  --show  ising.py
+```
