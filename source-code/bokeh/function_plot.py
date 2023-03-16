@@ -4,14 +4,14 @@ from argparse import ArgumentParser
 from bokeh.plotting import figure, output_file, show
 import numpy as np
 
-arg_parser = ArgumentParser(description='plots damped pendulum amplitude')
+arg_parser = ArgumentParser(description='plots damped pendulum amplitude in an HTML page')
 arg_parser.add_argument('--mu', type=float, default=0.2,
                         help='damping coefficient')
 arg_parser.add_argument('--alpha', type=float, default=0.8,
                         help='alpha factor for envelope curves')
 arg_parser.add_argument('--width', type=float, default=1.0,
                         help='line width for envelope curves')
-arg_parser.add_argument('file', nargs='?', help='output file name')
+arg_parser.add_argument('file', help='HTML output file name')
 options = arg_parser.parse_args()
 
 # create function data
