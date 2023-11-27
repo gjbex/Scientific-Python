@@ -1,0 +1,9 @@
+name: manim
+channels:
+  - conda-forge
+dependencies:
+  - manim
+  - jupyterlab
+  - numpy
+  - scipy
+prefix: /home/gjb/mambaforge/envs/manim
