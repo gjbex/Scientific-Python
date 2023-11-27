@@ -41,3 +41,5 @@ to create it.  There is some material not covered in the presentation as well.
 * [`vpython`]: illustrations of using VPython for physics and mathematics animations.
 * [`cannon.ipynb`]: Jupyter notebook illustrating the use of numpy, scipy, sympy and
   bokeh.
+* [`manim`](manim): sample code for illustrating manim, a framework to create
+  mathematical animations.

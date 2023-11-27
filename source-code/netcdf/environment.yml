@@ -2,47 +2,7 @@ name: netcdf
 channels:
   - defaults
 dependencies:
-  - _libgcc_mutex=0.1=main
-  - _openmp_mutex=4.5=1_gnu
-  - blas=1.0=mkl
-  - ca-certificates=2021.5.25=h06a4308_1
-  - certifi=2021.5.30=py39h06a4308_0
-  - cftime=1.5.0=py39h6323ea4_0
-  - curl=7.71.1=hbc83047_1
-  - hdf4=4.2.13=h3ca952b_2
-  - hdf5=1.10.6=hb1b8bf9_0
-  - intel-openmp=2021.2.0=h06a4308_610
-  - jpeg=9b=h024ee3a_2
-  - krb5=1.18.2=h173b8e3_0
-  - ld_impl_linux-64=2.35.1=h7274673_9
-  - libcurl=7.71.1=h20c2e04_1
-  - libedit=3.1.20210216=h27cfd23_1
-  - libffi=3.3=he6710b0_2
-  - libgcc-ng=9.3.0=h5101ec6_17
-  - libgfortran-ng=7.5.0=ha8ba4b0_17
-  - libgfortran4=7.5.0=ha8ba4b0_17
-  - libgomp=9.3.0=h5101ec6_17
-  - libnetcdf=4.6.1=h2053bdc_3
-  - libssh2=1.9.0=h1ba5d50_1
-  - libstdcxx-ng=9.3.0=hd4cf53a_17
-  - mkl=2021.2.0=h06a4308_296
-  - mkl-service=2.3.0=py39h27cfd23_1
-  - mkl_fft=1.3.0=py39h42c9631_2
-  - mkl_random=1.2.1=py39ha9443f7_2
-  - ncurses=6.2=he6710b0_1
-  - netcdf4=1.5.6=py39hd5c503a_0
-  - numpy=1.20.2=py39h2d18471_0
-  - numpy-base=1.20.2=py39hfae3a4d_0
-  - openssl=1.1.1k=h27cfd23_0
-  - pip=21.1.2=py39h06a4308_0
-  - python=3.9.5=h12debd9_4
-  - readline=8.1=h27cfd23_0
-  - setuptools=52.0.0=py39h06a4308_0
-  - six=1.16.0=pyhd3eb1b0_0
-  - sqlite=3.35.4=hdfb4753_0
-  - tk=8.6.10=hbc83047_0
-  - tzdata=2020f=h52ac0ba_0
-  - wheel=0.36.2=pyhd3eb1b0_0
-  - xz=5.2.5=h7b6447c_0
-  - zlib=1.2.11=h7b6447c_3
+  - netcdf4
+  - numpy
+  - python
 prefix: /home/gjb/miniconda3/envs/netcdf

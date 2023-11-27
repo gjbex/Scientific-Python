@@ -10,4 +10,7 @@ to visualize physics simulations.
    is a double pendulum.
 1. `double_pendulum.py`: module that computes the ODEs and the corresponding Jacobian
    for the double pendulum using sympy.
+1. `spring.ipynb`: Jupyter notebook visualizing a mass subject to gravity and suspended
+   from a spring.
+1. `elastic_collistion.ipynb`: Jupyter notebook visualizing two spherical objects colliding.
 1. `environment.yml`: conda environment defintion requred to run the notebook.
