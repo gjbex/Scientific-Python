@@ -1,0 +1,17 @@
+name: sympy_plotting
+channels:
+  - conda-forge
+dependencies:
+  - sympy
+  - jupyterlab
+  - ipywidgets
+  - ipywidgets_bokeh
+  - sympy_plot_backends
+  - ca-certificates
+  - certifi
+  - openssl
+  - colorcet
+  - adaptive
+  - ipympl
+  - plotly
+prefix: /home/gjb/mambaforge/envs/sympy_plotting
