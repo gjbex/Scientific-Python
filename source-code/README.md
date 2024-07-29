@@ -39,7 +39,12 @@ to create it.  There is some material not covered in the presentation as well.
   N-dimensional arrays.
 * [`netcdf`](netcdf): sample code for reading and writing NetCDF data.
 * [`vpython`]: illustrations of using VPython for physics and mathematics animations.
-* [`cannon.ipynb`]: Jupyter notebook illustrating the use of numpy, scipy, sympy and
-  bokeh.
 * [`manim`](manim): sample code for illustrating manim, a framework to create
   mathematical animations.
+* [`cannon.ipynb`]: Jupyter notebook illustrating the use of numpy, scipy, sympy and
+  bokeh.
+* [`cellular_automata.ipynb`]: Jupyter notebook illustrating the use of matplotlib.
+* [`diffusion_limited_aggregation.ipynb`]: Jupyter notebook illustrating the use of
+  numpy and matplotlib.
+* [`lennard_jones.ipynb`]: Jupyter notebook illustrating the use of numpy, scipy, sympy
+  and matplotlib.
