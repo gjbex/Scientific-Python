@@ -46,5 +46,7 @@ to create it.  There is some material not covered in the presentation as well.
 * [`cellular_automata.ipynb`]: Jupyter notebook illustrating the use of matplotlib.
 * [`diffusion_limited_aggregation.ipynb`]: Jupyter notebook illustrating the use of
   numpy and matplotlib.
+* [`ising_model.ipynb`]: Jupyter notebook illustrating the use of numpy and dependency
+  injection in simulation design.
 * [`lennard_jones.ipynb`]: Jupyter notebook illustrating the use of numpy, scipy, sympy
   and matplotlib.
