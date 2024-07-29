@@ -24,29 +24,35 @@ to create it.  There is some material not covered in the presentation as well.
 
 ## What is it?
 * [`birdsong`](birdsong): illustration of signal processing with scipy, reading
-  and writing of a WAV file, computing the amplitude spectrum using FFT, applying
-  a high-pass filter.
+  and writing of a WAV file, computing the amplitude spectrum using FFT,
+  applying a high-pass filter.
 * [`boekh`](bokeh): illustrations of how to create plots using bokeh, including
   interactive plots.
 * [`hdf5`](hdf5): illustrations of how to create and access HDF5 files.
-* [`image-processing`](image-processing): illustrations of image processing using
-  scikit-image and video processing using OpenCV.
-* [`matplotlib`](matplotlib): illustrations of how to create plots using matplotlib.
+* [`image-processing`](image-processing): illustrations of image processing
+  using scikit-image and video processing using OpenCV.
+* [`matplotlib`](matplotlib): illustrations of how to create plots using
+  matplotlib.
 * [`matrices`](matrices): some numpy illustrations.
 * [`numpy`](numpy): some numpy and scipy illustrations.
-* [`sympy`](sympy): some illustrations of doing symbolic computations using sympy.
+* [`sympy`](sympy): some illustrations of doing symbolic computations using
+  sympy.
 * [`xarray`](xarray): introduction to `xarray`, a library for indexed, labeled
   N-dimensional arrays.
 * [`netcdf`](netcdf): sample code for reading and writing NetCDF data.
-* [`vpython`]: illustrations of using VPython for physics and mathematics animations.
+* [`vpython`]: illustrations of using VPython for physics and mathematics
+  animations.
 * [`manim`](manim): sample code for illustrating manim, a framework to create
   mathematical animations.
-* [`cannon.ipynb`]: Jupyter notebook illustrating the use of numpy, scipy, sympy and
-  bokeh.
-* [`cellular_automata.ipynb`]: Jupyter notebook illustrating the use of matplotlib.
-* [`diffusion_limited_aggregation.ipynb`]: Jupyter notebook illustrating the use of
-  numpy and matplotlib.
-* [`ising_model.ipynb`]: Jupyter notebook illustrating the use of numpy and dependency
-  injection in simulation design.
-* [`lennard_jones.ipynb`]: Jupyter notebook illustrating the use of numpy, scipy, sympy
-  and matplotlib.
+* [`cannon.ipynb`](cannon.ipynb): Jupyter notebook illustrating the use of
+  numpy, scipy, sympy and bokeh.
+* [`cellular_automata.ipynb`](cellular_automata.ipynb): Jupyter notebook
+  illustrating the use of matplotlib.
+* [`diffusion_limited_aggregation.ipynb`](diffusion_limited_aggregation.ipynb):
+  Jupyter notebook illustrating the use of numpy and matplotlib.
+* [`ising_model.ipynb`](ising_model.ipynb): Jupyter notebook illustrating the
+  use of numpy and dependency injection in simulation design.
+* [`lennard_jones.ipynb`](lennard_jones.ipynb): Jupyter notebook illustrating
+  the use of numpy, scipy, sympy and matplotlib.
+* [`prison_guard.ipynb`](prison_guard.ipynb): Jupyter notebook illustrating the
+  use of numpy and matplotlib.
