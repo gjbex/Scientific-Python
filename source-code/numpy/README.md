@@ -45,6 +45,10 @@ algorithms for scientific computing (Lapack, statistics,...).
     the sum of the values; intended for I/O performance tests.
 1. `genetic_drift.ipynb`: Jupyter notebook illustrating how to use numpy to model systems
    of arbitrary dimensions.
+1. `exponentiation.ipynb`: Jupyter notebook to illustrate that the algorithm can have a
+   significant impact on performance.
+1. `io_performance.ipynb`: Jupyter notebook to illustrate the performance of different
+   I/O methods (text, binary, HDF5).
 
 
 ## Pendulum
