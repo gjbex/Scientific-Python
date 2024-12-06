@@ -47,6 +47,8 @@ algorithms for scientific computing (Lapack, statistics,...).
    of arbitrary dimensions.
 1. `exponentiation.ipynb`: Jupyter notebook to illustrate that the algorithm can have a
    significant impact on performance.
+1. `io_performance.ipynb`: Jupyter notebook to illustrate the performance of different
+   I/O methods (text, binary, HDF5).
 
 
 ## Pendulum
