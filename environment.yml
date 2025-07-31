@@ -20,5 +20,6 @@ dependencies:
   - xarray
   - networkx
   - nbconvert
+  - nbdime
   - seaborn
 prefix: /home/gjb/mambaforge/envs/scientific_python
