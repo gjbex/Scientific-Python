@@ -1,9 +1,8 @@
 name: scientific_python
 channels:
-  - defaults
+  - conda-forge
 dependencies:
   - bokeh
-  - hdf5
   - ipywidgets
   - jupyterlab
   - jupyterlab_widgets
@@ -14,9 +13,13 @@ dependencies:
   - opencv
   - pandas
   - pytables
-  - python
-  - scikit-image
+  - h5py
   - scipy
+  - scikit-image
   - sympy
   - xarray
-prefix: /home/gjb/miniconda3/envs/scientific_python
+  - networkx
+  - nbconvert
+  - nbdime
+  - seaborn
+prefix: /home/gjb/mambaforge/envs/scientific_python
