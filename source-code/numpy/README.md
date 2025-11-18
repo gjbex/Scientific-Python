@@ -49,7 +49,7 @@ algorithms for scientific computing (Lapack, statistics,...).
    significant impact on performance.
 1. `io_performance.ipynb`: Jupyter notebook to illustrate the performance of different
    I/O methods (text, binary, HDF5).
-
+1. `broadcast.ipynb`: Jupyter notebook illustrating the use of broadcasting in numpy.
 
 ## Pendulum
 
