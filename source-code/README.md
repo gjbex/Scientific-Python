@@ -26,7 +26,7 @@ to create it.  There is some material not covered in the presentation as well.
 * [`birdsong`](birdsong): illustration of signal processing with scipy, reading
   and writing of a WAV file, computing the amplitude spectrum using FFT,
   applying a high-pass filter.
-* [`boekh`](bokeh): illustrations of how to create plots using bokeh, including
+* [`bokeh`](bokeh): illustrations of how to create plots using bokeh, including
   interactive plots.
 * [`hdf5`](hdf5): illustrations of how to create and access HDF5 files.
 * [`image-processing`](image-processing): illustrations of image processing
