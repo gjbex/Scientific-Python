@@ -22,7 +22,7 @@ def matmul(a, b, c):
     for i in range(n):
         for j in range(n):
             for k in range(n):
-                c[i][j] += a[i][k]*a[k][j]
+                c[i][j] += a[i][k]*b[k][j]
 
 
 def main():
