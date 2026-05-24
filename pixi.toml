@@ -1,0 +1,87 @@
+[workspace]
+name = "scientific-python"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+
+[tasks]
+lab = "jupyter lab source-code"
+notebook = "jupyter notebook source-code"
+
+[dependencies]
+python = ">=3.10,<3.13"
+jupyterlab = "*"
+ipywidgets = "*"
+jupyterlab_widgets = "*"
+nbconvert = "*"
+nbdime = "*"
+numpy = "*"
+scipy = "*"
+matplotlib = "*"
+pandas = "*"
+sympy = "*"
+seaborn = "*"
+networkx = "*"
+
+[feature.bokeh.dependencies]
+bokeh = "*"
+
+[feature.performance.dependencies]
+numexpr = "*"
+
+[feature.image.dependencies]
+scikit-image = "*"
+opencv = "*"
+
+[feature.hdf5.dependencies]
+h5py = "*"
+pytables = "*"
+
+[feature.xarray.dependencies]
+xarray = "*"
+
+[feature.netcdf.dependencies]
+netcdf4 = "*"
+xarray = "*"
+
+[feature.netcdf.tasks]
+netcdf-write = { cmd = "python write_netcdf.py", cwd = "source-code/netcdf" }
+netcdf-read = { cmd = "python read_netcdf.py", cwd = "source-code/netcdf" }
+
+[feature.vpython.dependencies]
+vpython = "*"
+jupyterlab-vpython = "*"
+
+[feature.manim.dependencies]
+manim = "*"
+
+[feature.manim.tasks]
+manim-square = { cmd = "manim -pql square_and_circle.py SquareAndCircle", cwd = "source-code/manim" }
+
+[feature.sympy-plotting.dependencies]
+sympy_plot_backends = "*"
+ipywidgets_bokeh = "*"
+plotly = "*"
+ipympl = "*"
+colorcet = "*"
+adaptive = "*"
+
+[environments]
+default = ["bokeh", "performance"]
+image = ["bokeh", "performance", "image"]
+hdf5 = ["hdf5"]
+xarray = ["xarray"]
+netcdf = ["netcdf"]
+vpython = ["vpython"]
+manim = ["manim"]
+sympy-plotting = ["bokeh", "sympy-plotting"]
+full = [
+    "bokeh",
+    "performance",
+    "image",
+    "hdf5",
+    "xarray",
+    "netcdf",
+    "vpython",
+    "manim",
+    "sympy-plotting",
+]

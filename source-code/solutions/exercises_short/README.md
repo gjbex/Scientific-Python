@@ -1,6 +1,6 @@
 # Solutions for Short Exercises
 
-This directory contains one example solution per exercise from `short_exercises.md`.
+This directory contains one example solution per exercise from `exercises_short.md`.
 
 ## Files
 

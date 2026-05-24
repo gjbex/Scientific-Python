@@ -2,7 +2,7 @@
 
 These exercises are based on the same notebooks and directories as the longer exercise sheet, but are scoped to take approximately 30 minutes each. The emphasis is on a single concept, a short implementation step, and a brief interpretation.
 
-This sheet is intended for tutorials, short labs, or preparatory work. Several of these problems can be used as stepping stones toward the longer assignments collected in `exercises.md`.
+This sheet is intended for tutorials, short labs, or preparatory work. Several of these problems can be used as stepping stones toward the longer assignments collected in `exercises_challenging.md`. For an overview of all exercise sheets, see `exercises.md`.
 
 ## 1. Empirical scaling of matrix multiplication
 

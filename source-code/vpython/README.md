@@ -3,6 +3,21 @@
 VPython is a framework to create 3D animations in Python.  It can be used
 to visualize physics simulations.
 
+## Requirements
+
+The recommended environment is the `vpython` Pixi environment defined in the
+repository root.  To start Jupyter Lab with VPython available, run:
+
+```bash
+pixi run -e vpython lab
+```
+
+From this directory, notebooks or scripts can also be opened with:
+
+```bash
+pixi run -e vpython jupyter lab .
+```
+
 ## What is it?
 
 1. `pendulum.ipynb`: Jupyter notebook illustrating VPython on a non-linear frictionless

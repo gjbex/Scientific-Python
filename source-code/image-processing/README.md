@@ -2,6 +2,22 @@
 Some sample code for image processing using Scikit-Image and video
 processing with OpenCV.
 
+## Requirements
+
+The recommended environment is the `image` Pixi environment defined in the
+repository root:
+
+```bash
+pixi run -e image lab
+```
+
+From this directory, scripts can also be run directly, for example:
+
+```bash
+pixi run -e image python analyze.py
+pixi run -e image python segmentation.py
+```
+
 ## What is it?
 1. `denoise.py`: sharpen an image using deconvolution.
 1. `segmentation.py`: segmentation using an active cotour model, aka,

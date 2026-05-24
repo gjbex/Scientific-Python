@@ -2,7 +2,7 @@
 
 These exercises are intended to take approximately 10 minutes each and start from scratch. They focus on core `numpy`, `scipy`, and `sympy` functionality rather than on the repository material. Each problem targets a small number of functions and is suitable for a quick practice session, a warm-up exercise, or a short tutorial.
 
-This sheet is intended as an entry point before moving on to `short_exercises.md` and `exercises.md`.
+This sheet is intended as an entry point before moving on to `exercises_short.md` and `exercises_challenging.md`. For an overview of all exercise sheets, see `exercises.md`.
 
 ## NumPy
 

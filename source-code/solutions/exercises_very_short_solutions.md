@@ -1,6 +1,6 @@
 # Example Solutions for Very Short Exercises
 
-These are concise example solutions for the exercises in `very_short_exercises.md`. They are intended as worked examples, not as the only acceptable answers.
+These are concise example solutions for the exercises in `exercises_very_short.md`. They are intended as worked examples, not as the only acceptable answers.
 
 ## NumPy
 

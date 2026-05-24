@@ -5,6 +5,20 @@ use of alternative backends such as Bokeh.  Also some examples
 of interactive plots implemented either using sympy plotting
 backends package or ipywidgets.
 
+## Requirements
+
+The recommended environment is the `sympy-plotting` Pixi environment defined
+in the repository root:
+
+```bash
+pixi run -e sympy-plotting lab
+```
+
+From this directory, the notebook can also be opened with:
+
+```bash
+pixi run -e sympy-plotting jupyter lab .
+```
 
 ## What is it?
 

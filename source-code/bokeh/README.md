@@ -6,6 +6,20 @@ page that can be viewed with any modern browser.
 Note: out of the box, these notebooks work with Jupyter Notebook, *not*
 Jupyter Lab!
 
+## Requirements
+
+Bokeh is included in the default Pixi environment defined in the repository
+root:
+
+```bash
+pixi run lab
+```
+
+From this directory, examples can also be run directly, for example:
+
+```bash
+pixi run bokeh serve --show ising.py
+```
 
 ## What is it?
 1. `bokeh_intro.ipynb`: Jupyter notebook showing some basic plotting
@@ -26,5 +40,5 @@ Jupyter Lab!
 
 To use `ising.py`, run it with the Bokeh server, i.e.,
 ```bash
-$ bokeh serve  --show  ising.py
+pixi run bokeh serve --show ising.py
 ```

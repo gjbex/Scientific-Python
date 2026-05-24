@@ -14,7 +14,15 @@ a few examples.
 
 ## How to use it?
 
-To render and run the animation, use:
+The recommended environment is the `manim` Pixi environment defined in the
+repository root.  From the repository root, use:
+
 ```bash
-$ manim  -p  square_and_circle.py
+pixi run -e manim manim-square
+```
+
+From this directory, the example can also be rendered directly:
+
+```bash
+pixi run -e manim manim -pql square_and_circle.py SquareAndCircle
 ```

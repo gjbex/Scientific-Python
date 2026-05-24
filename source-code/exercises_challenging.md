@@ -4,7 +4,7 @@ These exercises are based on the Jupyter notebooks in this repository, together 
 
 Effort estimates are approximate and assume that students are already comfortable with Python, NumPy, plotting, and basic scientific computing.
 
-This sheet is intended for longer assignments or mini-projects. For shorter in-class or tutorial work based on the same material, see `short_exercises.md`.
+This sheet is intended for longer assignments or mini-projects. For shorter in-class or tutorial work based on the same material, see `exercises_short.md`. For quick warm-up exercises that start from basic NumPy, SciPy, and SymPy operations, see `exercises_very_short.md`. For an overview of all exercise sheets, see `exercises.md`.
 
 ## 1. Blocked matrix multiplication and performance analysis
 

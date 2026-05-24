@@ -3,24 +3,64 @@
 This is source code that is either used in the presentation, or was developed
 to create it.  There is some material not covered in the presentation as well.
 
+## Exercise sheets
+
+* [`exercises.md`](exercises.md): overview of the available exercise sheets.
+* [`exercises_very_short.md`](exercises_very_short.md): 5-10 minute warm-up
+  exercises covering small NumPy, SciPy, and SymPy tasks.
+* [`exercises_short.md`](exercises_short.md): approximately 30-minute exercises
+  based on the notebooks and example code in this repository.
+* [`exercises_challenging.md`](exercises_challenging.md): longer, more
+  sophisticated assignments and mini-projects for advanced practice.
+
 ## Requirements
 
-* Python version: at least 3.6
-* Packages (names listed taht can be used with `pip` or `conda` to install):
+The preferred way to run the examples is through the Pixi environments defined
+in [`../pixi.toml`](../pixi.toml).
+
+To start Jupyter Lab with the default training environment, run this from the
+repository root:
+
+```bash
+pixi run lab
+```
+
+Examples that need additional packages can be run with a named environment.
+For example, the NetCDF examples can be run either from the repository root:
+
+```bash
+pixi run -e netcdf netcdf-write
+```
+
+or from their own directory:
+
+```bash
+cd source-code/netcdf
+pixi run -e netcdf python write_netcdf.py
+```
+
+The default environment contains:
   * numpy
   * scipy
   * matplotlib
   * bokeh
   * sympy
-  * pytables
-  * scikit-image
-  * jupyter
   * ipywidgets
-* Optional packages
+  * pandas
+  * seaborn
+  * networkx
+  * Jupyter Lab
+
+Optional named environments provide:
   * opencv
   * numexpr
-  * pandas
+  * pytables
+  * h5py
+  * scikit-image
+  * xarray
+  * netcdf4
   * vpython
+  * manim
 
 ## What is it?
 * [`birdsong`](birdsong): illustration of signal processing with scipy, reading
