@@ -48,7 +48,6 @@ The default environment contains:
   * ipywidgets
   * pandas
   * seaborn
-  * networkx
   * Jupyter Lab
 
 Optional named environments provide:
