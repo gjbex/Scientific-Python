@@ -1,0 +1,151 @@
+schema_version = 2
+id = "scientific-python"
+title = "Scientific Python"
+content_language = "en"
+summary = """
+The Python programming language is increasingly popular. It is a versatile language for general purpose programming and accessible for novice programmers. However, it is also increasingly used for applications in the domain of scientific computing. This training introduces modules that are useful in that context.
+"""
+languages = ["Python"]
+
+[[learning_outcomes]]
+statement = "Be able to use numpy to represent and compute with multidimensional arrays."
+competencies = ["numpy.create-slice-and-reshape-arrays", "numpy.vectorized-computations", "numpy.reductions"]
+
+[[learning_outcomes]]
+statement = "Have an overview of the scope of scipy."
+competencies = ["scientific-python.select-scipy-functionality"]
+
+[[learning_outcomes]]
+statement = "Be able to create data visualizations with matplotlib and bokeh."
+competencies = ["matplotlib.create-basic-plots", "data-science.create-statistical-and-interactive-visualizations"]
+
+[[learning_outcomes]]
+statement = "Be able to use sympy to do symbolic computations."
+competencies = ["scientific-python.symbolic-computation"]
+
+[[learning_outcomes]]
+statement = "Be able to represent and manipulate data in HDF5 format."
+competencies = ["scientific-python.hdf5-data"]
+
+[[learning_outcomes]]
+statement = "Know how to start on an image or video manipulation project."
+competencies = ["scientific-python.image-and-video-workflows"]
+
+[source]
+metadata_document = "docs/README.md"
+repository_url = "https://github.com/gjbex/Scientific-Python/"
+website_url = "https://gjbex.github.io/Scientific-Python/"
+license = "CC-BY-4.0"
+
+[delivery]
+duration_minutes = 240
+duration_kind = "fixed"
+session_count = 1
+target_session_duration_minutes = 240
+schedule_complete = true
+description = """
+Total duration: 4 hours.
+"""
+
+[audience]
+description = """
+This training is for you if you need to use Python for scientific computing.
+"""
+
+[prerequisites]
+summary = """
+You will need experience programming in Python. This is not a training that starts from scratch. If you plan to do Python programming in a Linux or HPC environment you should be familiar with these as well. More concretely, participants should already be comfortable with the following: * running Python code in Jupyter or from the command line; * variables, numbers, strings, booleans, and basic containers such as lists and dictionaries; * `if`/`else` statements and `for` loops; * writing and calling simple functions with arguments and a return value; * indexing and slicing sequences; * importing modules and calling functions from them; * reading short Python scripts without needing every line explained. You do not need prior experience with NumPy, SciPy, SymPy, HDF5, or image processing. Those are part of the training itself.
+"""
+competencies = ["python.run-code", "python.values-and-containers", "python.control-flow-and-comprehensions", "python.functions", "python.index-and-slice-sequences", "python.import-modules"]
+
+[self_assessment]
+introduction = """
+If you can do most of the tasks below without looking up basic Python syntax, you are likely ready for this training.
+"""
+tasks = [
+  "Write a function that returns `sin(x)` for a given input `x`.",
+  "Loop over a list of numbers and compute their average.",
+  "Use `if`/`else` to classify a value as negative, zero, or positive.",
+  "Extract every second element from a list or array using slicing.",
+  "Read a short function with nested loops and understand what it computes.",
+  "Import a module such as `math` and call `math.cos`.",
+  "Store a few values in a dictionary and retrieve one by key.",
+  "Make a small change to an example script and run it again."
+]
+
+[requirements]
+software = [
+  "Laptop or desktop with internet access.",
+  "A system set up so you can connect to an HPC system, an account on an HPC system (e.g., VSC, CECI, ...), compute credits if that is required to run jobs on the HPC system if you want to use an HPC system.",
+  "A Python environment that can run Jupyter Lab if you want to use your own system.",
+  "Access to Google Colaboratory if you prefer not to install software."
+]
+
+[level]
+introductory_percent = 30
+intermediate_percent = 40
+advanced_percent = 30
+description = """
+For participants who already have basic Python programming experience, the material in this training is approximately These percentages describe the level of the scientific Python topics covered in the training, not the required entry level in Python itself.
+"""
+
+[[materials]]
+kind = "slides"
+path = "scientific_python.pptx"
+
+[[materials]]
+kind = "source-code"
+path = "source-code"
+
+[[materials]]
+kind = "environment"
+path = "environment.yml"
+
+[[trainers]]
+name = "Geert Jan Bex"
+email = "geertjan.bex@uhasselt.be"
+
+[[maintainers]]
+name = "Geert Jan Bex"
+email = "geertjan.bex@uhasselt.be"
+
+[[sessions]]
+id = "session-1"
+title = "Session one"
+duration_minutes = 240
+
+[[sessions.items]]
+subject = "introduction and motivation"
+duration_minutes = 5
+
+[[sessions.items]]
+subject = "numpy"
+duration_minutes = 80
+
+[[sessions.items]]
+subject = "scipy"
+duration_minutes = 25
+
+[[sessions.items]]
+subject = "coffee break"
+duration_minutes = 10
+
+[[sessions.items]]
+subject = "matplotlib & bokeh"
+duration_minutes = 30
+
+[[sessions.items]]
+subject = "sympy"
+duration_minutes = 25
+
+[[sessions.items]]
+subject = "HDF5"
+duration_minutes = 40
+
+[[sessions.items]]
+subject = "scikit-image & OpenCV"
+duration_minutes = 20
+
+[[sessions.items]]
+subject = "wrap up"
+duration_minutes = 10
