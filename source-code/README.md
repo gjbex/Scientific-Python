@@ -91,6 +91,8 @@ Optional named environments provide:
   Jupyter notebook illustrating the use of numpy and matplotlib.
 * [`ising_model.ipynb`](ising_model.ipynb): Jupyter notebook illustrating the
   use of numpy and dependency injection in simulation design.
+* [`lagrange_multipliers.ipynb`](lagrange_multipliers.ipynb): tutorial on
+  symbolic and numerical constrained optimization with physical examples.
 * [`lennard_jones.ipynb`](lennard_jones.ipynb): Jupyter notebook illustrating
   the use of numpy, scipy, sympy and matplotlib.
 * [`prison_guard.ipynb`](prison_guard.ipynb): Jupyter notebook illustrating the
