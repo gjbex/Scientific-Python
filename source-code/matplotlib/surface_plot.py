@@ -48,15 +48,19 @@ if __name__ == '__main__':
          f(xx, yy, x0=options.x0_2, freq=options.f_2))
 
 # plot
-    figure = plt.figure()
-    axes = figure.gca(projection='3d')
-    axes.set_xlim(options.x_min, options.x_max)
-    axes.set_ylim(options.y_min, options.y_max)
-    axes.set_zlim(options.z_min, options.z_max)
-    surface = axes.plot_surface(xx, yy, z, rstride=4, cstride=4,
-                                cmap=cm.coolwarm, linewidth=0)
+    figure, axes = plt.subplots(subplot_kw={"projection": "3d"})
+    axes.set(
+            xlim=(options.x_min, options.x_max),
+            ylim=(options.y_min, options.y_max),
+            zlim=(options.z_min, options.z_max),
+    )
+    surface = axes.plot_surface(
+            xx, yy, z,
+            cmap='coolwarm',
+            linewidth=0
+    )
     countours = axes.contour(x, y, z)
-    figure.colorbar(surface)
+    figure.colorbar(surface, ax=axes)
     if options.file:
         plt.savefig(options.file)
     else:
