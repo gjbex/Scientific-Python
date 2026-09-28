@@ -16,10 +16,12 @@ def gauss_distr(x, params):
     sigma = params['sigma']
     return scipy.stats.norm.pdf(x - mu)/sigma
 
+
 distributions = {
     'gamma': gamma_distr,
     'gauss': gauss_distr,
 }
+
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -39,15 +41,15 @@ if __name__ == '__main__':
 
 # read data from text file
     values = np.loadtxt(options.file)
-    plt.hist(values, options.bins, normed=1, color='red', alpha=0.6)
+    plt.hist(values, options.bins, density=True, color='red', alpha=0.6)
     plt.xlabel('$x$', fontsize=16)
     plt.ylabel('$P(x)$', fontsize=16)
 
 # compute theoretical distribution
-    if (options.distr):
+    if options.distr:
         name, param_str = options.distr.split(':')
         if name not in distributions:
-            warn_msg = "unknown distribution '{0}'".format(name)
+            warn_msg = f"unknown distribution '{name}'"
             warn(warn_msg)
         else:
             param_list = param_str.split(',')
