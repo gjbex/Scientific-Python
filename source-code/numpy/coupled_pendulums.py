@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
+import sys
 import numpy as np
-from scipy.integrate import ode
+from scipy.integrate import solve_ivp
 
 
 #
@@ -17,22 +18,12 @@ from scipy.integrate import ode
 #
 def functions(t, y, l1, l2, k):
     g = 9.81
-    return [
+    return (
         y[2],
         y[3],
         -(g/l1)*y[0] - k*(y[0] - y[1]),
         -(g/l2)*y[1] - k*(y[1] - y[0])
-    ]
-
-
-def jacobian(t, y, l1, l2, k):
-    g = 9.81
-    return [
-        [0.0,                  0.0,  1.0,   0.0],
-        [0.0,                  0.0,  0.0,   1.0],
-        [-(g/l1) - k,            k,  0.0,   0.0],
-        [k,            -(g/l2) - k,  0.0,   0.0]
-    ]
+    )
 
 
 def init_integrator(theta0_1, theta0_2, t0=0.0, l1=1.0, l2=1.0, k=0.1):
@@ -62,10 +53,17 @@ if __name__ == '__main__':
     arg_parser.add_argument('--delta_t', type=float, default=0.01,
                             help='delta t')
     options = arg_parser.parse_args()
-    integrator = init_integrator(options.theta0_1, options.theta0_2, t0=0.0,
-                                 l1=options.l1, l2=options.l2, k=options.k)
-    while integrator.successful() and integrator.t < options.t_max:
-        integrator.integrate(integrator.t + options.delta_t)
-        print('{0:.3f}\t{1:.5f}\t{2:.5f}'.format(integrator.t,
-                                                 integrator.y[0],
-                                                 integrator.y[1]))
+    solution = solve_ivp(
+            functions,
+            t_span=(0.0, options.t_max),
+            y0=(options.theta0_1, options.theta0_2, 0.0, 0.0),
+            args=(options.l1, options.l2, options.k),
+            t_eval=np.arange(0.0, options.t_max, options.delta_t),
+            rtol=1.0e-6, atol=1.0e-6,
+            method='RK45'
+    )
+    if not solution.success:
+        print('Integration failed: {0}'.format(solution.message), file=sys.stderr)
+        sys.exit(1)
+    for t, theta1, theta2 in zip(solution.t, solution.y[0], solution.y[1]):
+        print(f'{t:.3f}\t{theta1:.5f}\t{theta2:.5f}')
