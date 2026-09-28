@@ -10,8 +10,6 @@ def f(x, y, x0=0.0, freq=1.0, beta=0.5):
 if __name__ == '__main__':
     from argparse import ArgumentParser
     import matplotlib.pyplot as plt
-    from mpl_toolkits.mplot3d import Axes3D
-    from matplotlib import cm
 
 # command line argument handling
     arg_parser = ArgumentParser(description='plot heatmap of 2D Gaussians')
