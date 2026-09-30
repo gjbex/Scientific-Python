@@ -52,6 +52,8 @@ algorithms for scientific computing (Lapack, statistics,...).
 1. `broadcast.ipynb`: Jupyter notebook illustrating the use of broadcasting in numpy.
 1. `einsum.ipynb`: tutorial on explicit Einstein summation notation, contraction
    paths, and measured cases where `einsum` helps or hurts performance.
+1. `views.ipynb`: Jupyter notebook illustrating the use of views in numpy.
+
 
 ## Pendulum
 
