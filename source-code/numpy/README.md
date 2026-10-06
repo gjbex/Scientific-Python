@@ -55,6 +55,8 @@ algorithms for scientific computing (Lapack, statistics,...).
 1. `views.ipynb`: Jupyter notebook illustrating the use of views in numpy.
 1. `axes.ipynb`: Jupyter notebook to illustrate how axes can be used
    for various tasks.
+1. `numpy_linear_algebra.ipynb`: Jupyter notebook illustrating the use of
+   linear algebra in numpy.
 
 
 ## Pendulum
