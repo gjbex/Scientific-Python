@@ -53,8 +53,8 @@ algorithms for scientific computing (Lapack, statistics,...).
 1. `einsum.ipynb`: tutorial on explicit Einstein summation notation, contraction
    paths, and measured cases where `einsum` helps or hurts performance.
 1. `views.ipynb`: Jupyter notebook illustrating the use of views in numpy.
-1. `aggregation_functions.ipynb`: Jupyter notebook to illustrate how axes can be used
-   to aggregate array data.
+1. `axes.ipynb`: Jupyter notebook to illustrate how axes can be used
+   for various tasks.
 
 
 ## Pendulum
