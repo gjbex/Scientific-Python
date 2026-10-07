@@ -11,7 +11,7 @@ def compute_spectrum(signal, rate):
     k = np.arange(n)
     T = n/rate
     freq = k/T
-    Y = sp.fft(signal)/n
+    Y = sp.fft.fft(signal)/n
     return freq, Y
 
 if __name__ == '__main__':

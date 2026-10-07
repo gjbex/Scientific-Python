@@ -41,9 +41,14 @@ if __name__ == '__main__':
 
 # read data from text file
     values = np.loadtxt(options.file)
-    plt.hist(values, options.bins, density=True, color='red', alpha=0.6)
-    plt.xlabel('$x$', fontsize=16)
-    plt.ylabel('$P(x)$', fontsize=16)
+
+# create histogram of data
+    figure, axis = plt.subplots(figsize=(8, 6))
+    axis.set(
+            xlabel='$x$',
+            ylabel='$P(x)$',
+    )
+    axis.hist(values, options.bins, density=True, color='red', alpha=0.6)
 
 # compute theoretical distribution
     if options.distr:
@@ -62,7 +67,7 @@ if __name__ == '__main__':
 
             try:
                 y = distributions[name](x, params)
-                plt.plot(x, y, linewidth=2.0, color='black')
+                axis.plot(x, y, linewidth=2.0, color='black')
             except KeyError as e:
                 param_name = e.args[0]
                 warn_msg = "missing parameter '{0}' for distribution {1}"
@@ -70,6 +75,6 @@ if __name__ == '__main__':
 
 # if output file given, create plot, otherise, show it
     if options.output:
-        plt.savefig(options.output)
+        figure.savefig(options.output)
     else:
         plt.show()

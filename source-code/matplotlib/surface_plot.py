@@ -60,6 +60,6 @@ if __name__ == '__main__':
     countours = axes.contour(x, y, z)
     figure.colorbar(surface, ax=axes)
     if options.file:
-        plt.savefig(options.file)
+        figure.savefig(options.file)
     else:
         plt.show()

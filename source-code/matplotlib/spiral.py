@@ -4,18 +4,19 @@
 # ------------------------------------------------------------------------
 
 import matplotlib.pyplot as plt
-from numpy import arange, sin, cos, exp
+import numpy as np
 
-i  = arange(5000)
-x1 = 1.0*cos(i/10.0)*exp(-i/2500.0)
-y1 = 1.4*sin(i/10.0)*exp(-i/2500.0)
-d  = 450.0
-vx = cos(i/d)*x1 - sin(i/d)*y1
-vy = sin(i/d)*x1 + cos(i/d)*y1
-
-plt.plot(vx, vy, "k")
+i = np.arange(5000)
+x1 = 1.0*np.cos(i/10.0)*np.exp(-i/2500.0)
+y1 = 1.4*np.sin(i/10.0)*np.exp(-i/2500.0)
+d = 450.0
+vx = np.cos(i/d)*x1 - np.sin(i/d)*y1
+vy = np.sin(i/d)*x1 + np.cos(i/d)*y1
 
 h = max(vy) - min(vy)
 w = max(vx) - min(vx)
-plt.axes().set_aspect(w/h)
+
+figure, axis = plt.subplots()
+axis.plot(vx, vy, "k")
+axis.set_aspect(w/h)
 plt.show()

@@ -11,6 +11,59 @@ The four-hour version should remain a focused overview.  A six-hour workshop
 version can add hands-on practice and depth without introducing many more
 libraries.
 
+## Status audit (2026-10-07)
+
+This checklist was re-audited against the current `development` branch, using
+commit `65f59e7` (which added this file) as the baseline.  Checked items below
+are satisfied by the current materials.  Unchecked items may be wholly
+unaddressed or only partially addressed; the latter are called out here so
+that completed work is not lost and remaining work is not understated.
+
+### Confirmed progress
+
+- Removed uses of the removed scalar aliases `np.int`, `np.float`,
+  `np.complex`, and `np.bool` from the current slides and sources.
+- Added `default_rng` and reproducible seeding to the main slide deck, and
+  modernized selected examples.  A repository-wide conversion is not yet
+  complete.
+- Modernized the core ODE examples and slides to use `solve_ivp`.
+- Linked the expanded broadcasting notebook from the main deck; the notebook
+  now covers broadcasting rules, diagnosis, memory use, and performance
+  pitfalls.
+- Added explicit teaching material for aggregation axes, views versus copies,
+  and NumPy linear algebra, including `solve`, least squares, and numerical
+  comparisons.
+- Modernized the histogram and principal 3D surface-plot examples.
+- The SymPy pendulum material now demonstrates `lambdify`, a symbolic
+  Jacobian, and its use with a SciPy solver.
+
+### Remaining issues found during the audit
+
+- `source-code/vpython/pendulum.ipynb` still uses
+  `scipy.integrate.ode`.
+- Legacy global `np.random.*` calls remain in exercises, notebooks, and
+  scripts.  Some are harmless for throwaway data, but examples that teach
+  reproducibility or serve as models for new code should use a `Generator`.
+- The dtype slide now warns that extended precision is not portable, but
+  `source-code/numpy/numpy_datatypes.ipynb` still presents `np.float96` as if
+  it were generally available.
+- Slide 22 contains `np.arrange(24)` instead of `np.arange(24)`.
+- Stored error or interrupt output remains in
+  `source-code/sympy/triple_six_puzzle.ipynb`,
+  `source-code/sympy/griffith_chapter_01.ipynb`, and
+  `source-code/diffusion_limited_aggregation.ipynb`.  Several other notebooks
+  contain unexecuted code cells without a documented output policy.
+- The Bokeh README still says its notebooks do not work in JupyterLab, while
+  the repository's preferred command launches JupyterLab.  This needs a
+  current, tested statement rather than an environment assumption.
+- The live course structure is still the old one: xarray is absent from the
+  schedule and deck, while PyTables, Bokeh, and image/video processing remain
+  in the core path.
+- `docs/README.md` labels the course as 240 minutes but its schedule sums to
+  245 minutes.  `training.toml` sums to 240 minutes by assigning 5 rather than
+  10 minutes to the wrap-up.  These sources must be reconciled when the revised
+  schedule is adopted.
+
 ## Agreed scope boundaries
 
 - Scientific Python should own:
@@ -34,18 +87,18 @@ libraries.
 
 ## Priority 0: modernize and validate existing material
 
-- [ ] Replace removed NumPy aliases such as `np.int`, `np.float`,
+- [x] Replace removed NumPy aliases such as `np.int`, `np.float`,
   `np.complex`, and `np.bool` in the slides, notebooks, and scripts.
 - [ ] Review dtype examples for portability, especially extended-precision
   types on supported Linux, macOS, and Windows platforms.
 - [ ] Replace legacy global `np.random.*` examples with
   `np.random.default_rng()` where reproducibility or new code is being taught.
 - [ ] Replace `scipy.integrate.ode` examples with `scipy.integrate.solve_ivp`.
-- [ ] Replace calls such as `sp.fft(signal)` with the modern
+- [x] Replace calls such as `sp.fft(signal)` with the modern
   `scipy.fft.fft(signal)` API.
 - [ ] Update the signal-filtering example to use second-order sections where
   appropriate, e.g. `output="sos"` and `sosfiltfilt`.
-- [ ] Replace obsolete Matplotlib usage, including `hist(..., normed=...)` and
+- [x] Replace obsolete Matplotlib usage, including `hist(..., normed=...)` and
   `figure.gca(projection="3d")`.
 - [ ] Check all slide code fragments for syntax errors, misspelled names, and
   inconsistencies with the corresponding source files.
@@ -88,16 +141,16 @@ Use the following schedule as the target, including the break:
 
 ## NumPy coverage
 
-- [ ] Retain array creation, shapes, dtypes, indexing, slicing, vectorized
+- [x] Retain array creation, shapes, dtypes, indexing, slicing, vectorized
   operations, and views versus copies.
-- [ ] Promote broadcasting from the optional notebook material into the main
+- [x] Promote broadcasting from the optional notebook material into the main
   teaching path.
-- [ ] Teach reductions and the meaning of `axis` explicitly.
+- [x] Teach reductions and the meaning of `axis` explicitly.
 - [ ] Cover reshaping, stacking, and concatenation using practical examples.
-- [ ] Explain when basic slicing returns a view and when advanced/Boolean
+- [x] Explain when basic slicing returns a view and when advanced/Boolean
   indexing creates a copy.
-- [ ] Introduce reproducible random generation with `default_rng`.
-- [ ] Add numerical-comparison examples with `isclose` and `allclose`.
+- [x] Introduce reproducible random generation with `default_rng`.
+- [x] Add numerical-comparison examples with `isclose` and `allclose`.
 - [ ] Cover integer overflow, floating-point precision, NaNs, and dtype choices
   at a practical level.
 - [ ] Teach `solve` and least-squares before explicit matrix inversion.
@@ -117,7 +170,7 @@ Use the following schedule as the target, including the break:
   - [ ] scalar and multidimensional root finding;
   - [ ] interpolation;
   - [ ] `minimize`, `least_squares`, and `curve_fit`;
-  - [ ] ODE integration with `solve_ivp`;
+  - [x] ODE integration with `solve_ivp`;
   - [ ] statistical distributions and selected hypothesis tests;
   - [ ] sparse arrays and sparse solvers;
   - [ ] selected special functions.
@@ -144,12 +197,12 @@ Use the following schedule as the target, including the break:
 
 ## SymPy coverage
 
-- [ ] Retain symbols, assumptions, equation solving, differentiation,
+- [x] Retain symbols, assumptions, equation solving, differentiation,
   integration, simplification, and basic matrix operations.
 - [ ] Explain the distinction between exact and floating-point input.
-- [ ] Add `lambdify` to convert symbolic expressions into NumPy-callable
+- [x] Add `lambdify` to convert symbolic expressions into NumPy-callable
   functions.
-- [ ] Demonstrate passing a symbolic derivative or Jacobian to a SciPy solver.
+- [x] Demonstrate passing a symbolic derivative or Jacobian to a SciPy solver.
 - [ ] Move expression-tree internals to optional/advanced material if time is
   needed elsewhere.
 

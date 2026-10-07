@@ -42,10 +42,14 @@ if __name__ == '__main__':
          f(xx, yy, x0=options.x0_2, freq=options.f_2))
 
 # plot
-    plt.imshow(v, extent=[options.x_min, options.x_max,
-                          options.y_min, options.y_max])
-    plt.grid(True)
+    figure, axis = plt.subplots()
+    axis.imshow(
+            v,
+            extent=(options.x_min, options.x_max,
+                    options.y_min, options.y_max)
+    )
+    axis.grid(True)
     if options.file:
-        plt.savefig(options.file)
+        figure.savefig(options.file)
     else:
         plt.show()
