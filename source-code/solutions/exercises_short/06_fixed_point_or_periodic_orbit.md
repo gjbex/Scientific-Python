@@ -3,6 +3,9 @@
 ## Example solution
 
 ```python
+import numpy as np
+
+
 def classify(r, x0=0.2, n_burn=200, n_keep=20, tol=1.0e-8):
     x = x0
     for _ in range(n_burn):
