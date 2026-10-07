@@ -29,7 +29,7 @@ competencies = ["scientific-python.hdf5-data"]
 
 [[learning_outcomes]]
 statement = "Know how to start on an image or video manipulation project."
-competencies = ["scientific-python.image-and-video-workflows"]
+competencies = ["scientific-python.image-and-video-workflows"]                  
 
 [source]
 metadata_document = "docs/README.md"
@@ -86,7 +86,7 @@ introductory_percent = 30
 intermediate_percent = 40
 advanced_percent = 30
 description = """
-For participants who already have basic Python programming experience, the material in this training is approximately These percentages describe the level of the scientific Python topics covered in the training, not the required entry level in Python itself.
+For participants who already have basic Python programming experience, the material in this training is approximately 30% introductory, 40% intermediate, and 30% advanced. These percentages describe the level of the scientific Python topics covered in the training, not the required entry level in Python itself.
 """
 
 [[materials]]
@@ -148,4 +148,4 @@ duration_minutes = 20
 
 [[sessions.items]]
 subject = "wrap up"
-duration_minutes = 10
+duration_minutes = 5

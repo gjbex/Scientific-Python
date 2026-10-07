@@ -4,6 +4,10 @@ GitHub repository for participants of the "Scientific Python" training.
 For information on the training, see the website
 [https://gjbex.github.io/Scientific-Python/](https://gjbex.github.io/Scientific-Python/)
 
+## Environment
+
+See [`SETUP.md`](SETUP.md) for instructions on creating an environment with
+Pixi or Mamba.  Pixi is the preferred setup for this repository.
 
 ## What is it?
 

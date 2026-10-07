@@ -50,6 +50,14 @@ algorithms for scientific computing (Lapack, statistics,...).
 1. `io_performance.ipynb`: Jupyter notebook to illustrate the performance of different
    I/O methods (text, binary, HDF5).
 1. `broadcast.ipynb`: Jupyter notebook illustrating the use of broadcasting in numpy.
+1. `einsum.ipynb`: tutorial on explicit Einstein summation notation, contraction
+   paths, and measured cases where `einsum` helps or hurts performance.
+1. `views.ipynb`: Jupyter notebook illustrating the use of views in numpy.
+1. `axes.ipynb`: Jupyter notebook to illustrate how axes can be used
+   for various tasks.
+1. `numpy_linear_algebra.ipynb`: Jupyter notebook illustrating the use of
+   linear algebra in numpy.
+
 
 ## Pendulum
 

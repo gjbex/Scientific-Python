@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import numpy as np
-from scipy.integrate import ode
+from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
@@ -38,64 +38,41 @@ class PhaseSpaceAnim(object):
 
 
 def func(t, y, g, l, q, F_d, omega_d, phase_d, anharmonic):
+    theta, omega = y
     if anharmonic:
-        return [
-            y[1],
-            -(g/l)*np.sin(y[0]) - q*y[1] + F_d*np.sin(omega_d*t + phase_d)
-        ]
-    else:
-        return [
-            y[1],
-            -(g/l)*y[0] - q*y[1] + F_d*np.sin(omega_d*t + phase_d)
-        ]
+        return (
+            omega,
+            -(g/l)*np.sin(theta) - q*omega + F_d*np.sin(omega_d*t + phase_d)
+        )
+    return (
+        omega,
+        -(g/l)*theta - q*omega + F_d*np.sin(omega_d*t + phase_d)
+    )
 
 
-def jacobian(t, y, g, l, q, F_d, omega_d, phase_d, anharmonic):
-    if anharmonic:
-        return [
-            [0.0, 1.0],
-            [-(g/l)*np.cos(y[0]), -q]
-        ]
-    else:
-        return [
-            [0.0, 1.0],
-            [-g/l, -q]
-        ]
-
-
-def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
+def solve(func, t0=0.0, t_max=20.0, delta_t=0.01,
           theta0=0.1, omega0=0.0, params={'g': 9.81, 'l': 9.81,
                                           'q': 0.05, 'F_d': 0.0,
                                           'omega_d': 0.5, 'phase_d': 0.0,
                                           'anharmonic': False},
-          atol=1.0e-6, rtol=0.0):
-    # select integrator
-    integrator = ode(func, jac).set_integrator('dopri5', atol=atol,
-                                               rtol=rtol)
-# set initial values
-    integrator.set_initial_value([theta0, omega0], t0)
-# set parameters
-    integrator.set_f_params(params['g'], params['l'], params['q'],
-                            params['F_d'], params['omega_d'],
-                            params['phase_d'], params['anharmonic'])
-    integrator.set_jac_params(params['g'], params['l'], params['q'],
-                              params['F_d'], params['omega_d'],
-                              params['phase_d'], params['anharmonic'])
-# solve equations
-    times = [t0]
-    thetas = [theta0]
-    omegas = [omega0]
-    while integrator.successful() and integrator.t < t_max:
-        integrator.integrate(integrator.t + delta_t)
-        times.append(integrator.t)
-        theta = integrator.y[0]
-        while theta > np.pi:
-            theta -= 2.0*np.pi
-        while theta < -np.pi:
-            theta += 2.0*np.pi
-        thetas.append(theta)
-        omegas.append(integrator.y[1])
-    return times, thetas, omegas
+          atol=1.0e-6, rtol=1.0e-6):
+    times = np.arange(t0, t_max, delta_t)
+    solution = solve_ivp(
+            func,
+            t_span=(t0, t_max),
+            y0=(theta0, omega0),
+            t_eval=times,
+            args=(params['g'], params['l'], params['q'],
+                  params['F_d'], params['omega_d'],
+                  params['phase_d'], params['anharmonic']),
+            method='RK45',
+            atol=atol,
+            rtol=rtol
+    )
+    if not solution.success:
+        raise RuntimeError(solution.message)
+    thetas = (solution.y[0] + np.pi) % (2.0*np.pi) - np.pi
+    return solution.t, thetas, solution.y[1]
 
 
 def sample_poincare(times, thetas, omegas, omega_d, prec=1.0e-4):
@@ -161,7 +138,7 @@ if __name__ == '__main__':
                             help='time step [s]')
     arg_parser.add_argument('--atol', type=float, default=1.0e-10,
                             help='absolute tolerance of integrator')
-    arg_parser.add_argument('--rtol', type=float, default=0.0,
+    arg_parser.add_argument('--rtol', type=float, default=1.0e-10,
                             help='relative tolerance of integrator')
     arg_parser.add_argument('--output', action='store_true',
                             help='write solutions to standrad output')
@@ -176,7 +153,7 @@ if __name__ == '__main__':
                             help='number of skip points for animation')
     options = arg_parser.parse_args()
     times, thetas, omegas = solve(
-            func=func, jac=jacobian,
+            func=func,
             t0=options.t0, t_max=options.t_max, delta_t=options.delta_t,
             theta0=options.theta0, omega0=options.omega0,
             params={'g': options.g, 'l': options.l, 'q': options.q,

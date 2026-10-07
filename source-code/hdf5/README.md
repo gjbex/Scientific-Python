@@ -4,6 +4,22 @@ HDF5 Python examples
 A collection of code samples to illustrate reading and writing HDF5
 files from Python using the PyTables module.
 
+Requirements
+------------
+The recommended environment is the `hdf5` Pixi environment defined in the
+repository root:
+
+```bash
+pixi run -e hdf5 lab
+```
+
+From this directory, scripts can also be run directly, for example:
+
+```bash
+pixi run -e hdf5 python create_table.py
+pixi run -e hdf5 python query_table.py
+```
+
 What is it?
 -----------
 1. `create_table.py`: creates an HDF5 file `test.h5` that has a
