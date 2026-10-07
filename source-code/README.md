@@ -3,6 +3,7 @@
 This is source code that is either used in the presentation, or was developed
 to create it.  There is some material not covered in the presentation as well.
 
+
 ## Exercise sheets
 
 * [`exercises.md`](exercises.md): overview of the available exercise sheets.
@@ -12,6 +13,7 @@ to create it.  There is some material not covered in the presentation as well.
   based on the notebooks and example code in this repository.
 * [`exercises_challenging.md`](exercises_challenging.md): longer, more
   sophisticated assignments and mini-projects for advanced practice.
+
 
 ## Requirements
 
@@ -61,7 +63,9 @@ Optional named environments provide:
   * vpython
   * manim
 
+
 ## What is it?
+
 * [`birdsong`](birdsong): illustration of signal processing with scipy, reading
   and writing of a WAV file, computing the amplitude spectrum using FFT,
   applying a high-pass filter.
