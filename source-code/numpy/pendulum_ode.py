@@ -71,7 +71,8 @@ def solve(func, t0=0.0, t_max=20.0, delta_t=0.01,
     )
     if not solution.success:
         raise RuntimeError(solution.message)
-    return solution.t, solution.y[0], solution.y[1]
+    thetas = (solution.y[0] + np.pi) % (2.0*np.pi) - np.pi
+    return solution.t, thetas, solution.y[1]
 
 
 def sample_poincare(times, thetas, omegas, omega_d, prec=1.0e-4):
