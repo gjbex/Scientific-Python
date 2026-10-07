@@ -21,17 +21,19 @@ y = np.exp(-options.mu*x)*np.cos(2.0*np.pi*x)
 y_plus = np.exp(-options.mu*x)
 y_min = -np.exp(-options.mu*x)
 
-plt.plot(x, y)
-plt.plot(x, y_plus, ':', alpha=options.alpha, color='red',
-         linewidth=options.width)
-plt.plot(x, y_min, ':', alpha=options.alpha, color='red',
-         linewidth=options.width)
-plt.xlabel(r'$t$', fontsize=14)
-plt.ylabel(r'$\theta(t)$', fontsize=14)
-plt.title('Damped pendulum')
-plt.text(10.0, 0.65, eq, fontsize=18)
+figure, axis = plt.subplots(figsize=(8, 4))
+axis.plot(x, y)
+axis.plot(x, y_plus, ':', alpha=options.alpha, color='red',
+          linewidth=options.width)
+axis.plot(x, y_min, ':', alpha=options.alpha, color='red',
+          linewidth=options.width)
+axis.set(
+        xlabel=r'$t$', ylabel=r'$\theta(t)$',
+        title='Damped pendulum',
+)
+axis.text(10.0, 0.65, eq, fontsize=18)
 
 if options.file:
-    plt.savefig(options.file)
+    figure.savefig(options.file)
 else:
     plt.show()

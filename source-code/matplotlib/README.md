@@ -19,3 +19,4 @@ Python.
    describing the paramagnetic/ferromagnetic phase transition in the mean field
    approximation.
 1. `surface_plot.py`: illustrates how to plot 3D surface plots.
+1. `spiral.py`: generates pretty picture.
