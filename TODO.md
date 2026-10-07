@@ -13,11 +13,12 @@ libraries.
 
 ## Status audit (2026-10-07)
 
-This checklist was re-audited against the current `development` branch, using
-commit `65f59e7` (which added this file) as the baseline.  Checked items below
-are satisfied by the current materials.  Unchecked items may be wholly
-unaddressed or only partially addressed; the latter are called out here so
-that completed work is not lost and remaining work is not understated.
+This checklist was re-audited against the `development` branch at commit
+`e9859b8`, using commit `65f59e7` (which added this file) as the baseline.
+Checked items below are satisfied by the current materials.  Unchecked items
+may be wholly unaddressed or only partially addressed; the latter are called
+out here so that completed work is not lost and remaining work is not
+understated.
 
 ### Confirmed progress
 
@@ -33,7 +34,11 @@ that completed work is not lost and remaining work is not understated.
 - Added explicit teaching material for aggregation axes, views versus copies,
   and NumPy linear algebra, including `solve`, least squares, and numerical
   comparisons.
-- Modernized the histogram and principal 3D surface-plot examples.
+- Modernized the Matplotlib deck and examples around the object-oriented
+  `Figure`/`Axes` interface, added a subplots example with constrained layout,
+  and reduced the 3D surface-plot treatment to one slide.
+- Removed the detailed PyTables slide sequence from the core deck and moved
+  the PyTables examples into a separate `source-code/hdf5/pytables` directory.
 - The SymPy pendulum material now demonstrates `lambdify`, a symbolic
   Jacobian, and its use with a SciPy solver.
 
@@ -47,7 +52,9 @@ that completed work is not lost and remaining work is not understated.
 - The dtype slide now warns that extended precision is not portable, but
   `source-code/numpy/numpy_datatypes.ipynb` still presents `np.float96` as if
   it were generally available.
-- Slide 22 contains `np.arrange(24)` instead of `np.arange(24)`.
+- Several Matplotlib slide fragments still need correction: slide 43 assigns
+  to `Figure` but later uses `figure`; slide 47 assigns `axes` but calls
+  `axis.hist`; and slide 48 imports `matploblib.pyplot`.
 - Stored error or interrupt output remains in
   `source-code/sympy/triple_six_puzzle.ipynb`,
   `source-code/sympy/griffith_chapter_01.ipynb`, and
@@ -56,9 +63,13 @@ that completed work is not lost and remaining work is not understated.
 - The Bokeh README still says its notebooks do not work in JupyterLab, while
   the repository's preferred command launches JupyterLab.  This needs a
   current, tested statement rather than an environment assumption.
-- The live course structure is still the old one: xarray is absent from the
-  schedule and deck, while PyTables, Bokeh, and image/video processing remain
-  in the core path.
+- The live course structure is still largely the old one: xarray is absent
+  from the schedule and deck, while Bokeh and image/video processing remain in
+  the core path.
+- The detailed PyTables material is no longer in the core deck, but slide 71
+  still names PyTables, and `source-code/hdf5/README.md` incorrectly describes
+  the HDF5 examples as using PyTables.  The relocated PyTables README does not
+  label the material as optional, specialist, or deprecated.
 - `docs/README.md` labels the course as 240 minutes but its schedule sums to
   245 minutes.  `training.toml` sums to 240 minutes by assigning 5 rather than
   10 minutes to the wrap-up.  These sources must be reconciled when the revised
@@ -135,7 +146,7 @@ Use the following schedule as the target, including the break:
   containers, NumPy, pandas, xarray, SciPy, and SymPy without teaching pandas.
 - [ ] Add a final course-navigation slide pointing to the data-science, HPC,
   machine-learning, GPU, and parallel-computing trainings.
-- [ ] Remove PyTables from the core presentation.
+- [x] Remove detailed PyTables teaching from the core presentation.
 - [ ] Move detailed Bokeh and image/video-processing material to optional
   sections or separate modules.
 
@@ -183,15 +194,18 @@ Use the following schedule as the target, including the break:
 
 ## Matplotlib coverage
 
-- [ ] Teach the object-oriented pattern using `fig, ax = plt.subplots()` as the
+- [x] Teach the object-oriented pattern using `fig, ax = plt.subplots()` as the
   default interface.
-- [ ] Add subplots, shared axes, legends, and constrained layout.
+- [x] Add subplots and constrained layout.
+- [x] Demonstrate legends.
+- [ ] Demonstrate shared axes.
 - [ ] Add error bars and uncertainty bands.
-- [ ] Cover logarithmic scales and appropriate limits.
+- [x] Demonstrate setting explicit axis limits.
+- [ ] Cover logarithmic scales and explain when they are appropriate.
 - [ ] Explain color maps and normalization for sequential, diverging, and
   categorical data.
 - [ ] Demonstrate publication-quality raster and vector export.
-- [ ] Prefer these broadly useful topics over detailed 3D plotting.
+- [x] Prefer these broadly useful topics over detailed 3D plotting.
 - [ ] Keep statistical and interactive visualization libraries in Python for
   Data Science, with cross-references where useful.
 
@@ -225,12 +239,14 @@ Use the following schedule as the target, including the break:
 
 - [ ] Reduce HDF5 from a 40-minute dual-API section to approximately 15 minutes
   of h5py fundamentals.
-- [ ] Cover context managers, groups, datasets, attributes, and slicing.
+- [x] Cover context managers, groups, datasets, attributes, and slicing.
 - [ ] Briefly explain chunking, compression, and extensible datasets without
   turning the section into an I/O-performance lecture.
 - [ ] Refer large-data, performance, and parallel-HDF5 topics to Python for HPC.
-- [ ] Keep PyTables examples available only as optional legacy/specialist
-  material, or remove them if they no longer serve a clear audience.
+- [x] Move the detailed PyTables examples out of the main h5py path.
+- [ ] Label the relocated PyTables examples as optional legacy/specialist
+  material, and correct the parent HDF5 README to describe h5py as the core
+  path.
 
 ## Hands-on material and exercises
 
