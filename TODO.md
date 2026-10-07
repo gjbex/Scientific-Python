@@ -40,9 +40,7 @@ that completed work is not lost and remaining work is not understated.
 ### Remaining issues found during the audit
 
 - `source-code/vpython/pendulum.ipynb` still uses
-  `scipy.integrate.ode`; `source-code/birdsong/analyse.py` still calls
-  `sp.fft(...)`; and `source-code/numpy/target_function_plot.py` still uses
-  `figure.gca(projection="3d")`.
+  `scipy.integrate.ode`.
 - Legacy global `np.random.*` calls remain in exercises, notebooks, and
   scripts.  Some are harmless for throwaway data, but examples that teach
   reproducibility or serve as models for new code should use a `Generator`.
@@ -96,11 +94,11 @@ that completed work is not lost and remaining work is not understated.
 - [ ] Replace legacy global `np.random.*` examples with
   `np.random.default_rng()` where reproducibility or new code is being taught.
 - [ ] Replace `scipy.integrate.ode` examples with `scipy.integrate.solve_ivp`.
-- [ ] Replace calls such as `sp.fft(signal)` with the modern
+- [x] Replace calls such as `sp.fft(signal)` with the modern
   `scipy.fft.fft(signal)` API.
 - [ ] Update the signal-filtering example to use second-order sections where
   appropriate, e.g. `output="sos"` and `sosfiltfilt`.
-- [ ] Replace obsolete Matplotlib usage, including `hist(..., normed=...)` and
+- [x] Replace obsolete Matplotlib usage, including `hist(..., normed=...)` and
   `figure.gca(projection="3d")`.
 - [ ] Check all slide code fragments for syntax errors, misspelled names, and
   inconsistencies with the corresponding source files.
