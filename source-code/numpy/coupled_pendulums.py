@@ -26,15 +26,6 @@ def functions(t, y, l1, l2, k):
     )
 
 
-def init_integrator(theta0_1, theta0_2, t0=0.0, l1=1.0, l2=1.0, k=0.1):
-    integrator = ode(functions, jacobian).set_integrator('dopri5',
-                                                         atol=1.0e-6,
-                                                         rtol=0.0)
-    integrator.set_initial_value([theta0_1, theta0_2, 0.0, 0.0], t0)
-    integrator.set_f_params(l1, l2, k)
-    integrator.set_jac_params(l1, l2, k)
-    return integrator
-
 if __name__ == '__main__':
     from argparse import ArgumentParser
     arg_parser = ArgumentParser(description='solved coupled pendulums')
