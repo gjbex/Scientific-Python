@@ -20,3 +20,5 @@ Python.
    approximation.
 1. `surface_plot.py`: illustrates how to plot 3D surface plots.
 1. `spiral.py`: generates pretty picture.
+1. `multiple_plots.ipynb`: Jupyter notebook illustrating how to create multiple
+   plots in a single figure.
