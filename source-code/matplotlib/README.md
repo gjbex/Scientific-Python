@@ -6,8 +6,8 @@ Python.
 
 ## What is it?
 
-1. `animation.py`: illustration of how to do animations with matplotlib, and
-   convert them to a movie (e.g., WMA).
+1. `animation.py`: illustrates how to create a Matplotlib animation and save it
+   as an MP4 file with ffmpeg.
 1. `distribution_plot.py`: takes a file as input and plots the values as a
    histogram.  Optionally, it can superimpose a specified theoretical
    distribution as well.
