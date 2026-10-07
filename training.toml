@@ -86,7 +86,7 @@ introductory_percent = 30
 intermediate_percent = 40
 advanced_percent = 30
 description = """
-For participants who already have basic Python programming experience, the material in this training is approximately These percentages describe the level of the scientific Python topics covered in the training, not the required entry level in Python itself.
+For participants who already have basic Python programming experience, the material in this training is approximately 30% introductory, 40% intermediate, and 30% advanced. These percentages describe the level of the scientific Python topics covered in the training, not the required entry level in Python itself.
 """
 
 [[materials]]
