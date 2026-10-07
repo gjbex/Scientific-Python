@@ -29,7 +29,7 @@ competencies = ["scientific-python.hdf5-data"]
 
 [[learning_outcomes]]
 statement = "Know how to start on an image or video manipulation project."
-competencies = ["scientific-python.image-and-video-workflows"]
+competencies = ["scientific-python.image-and-video-workflows"]                  
 
 [source]
 metadata_document = "docs/README.md"
@@ -148,4 +148,4 @@ duration_minutes = 20
 
 [[sessions.items]]
 subject = "wrap up"
-duration_minutes = 10
+duration_minutes = 5
