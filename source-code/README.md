@@ -99,5 +99,9 @@ Optional named environments provide:
   symbolic and numerical constrained optimization with physical examples.
 * [`lennard_jones.ipynb`](lennard_jones.ipynb): Jupyter notebook illustrating
   the use of numpy, scipy, sympy and matplotlib.
+* [`pendulum_period.ipynb`](pendulum_period.ipynb): tutorial that measures a
+  nonlinear pendulum's period using ODE events, derives its elliptic-integral
+  representation with SymPy, and verifies the result using adaptive
+  quadrature.
 * [`prison_guard.ipynb`](prison_guard.ipynb): Jupyter notebook illustrating the
   use of numpy and matplotlib.
