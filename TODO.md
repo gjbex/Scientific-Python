@@ -42,6 +42,18 @@ understated.
 - The SymPy pendulum material now demonstrates `lambdify`, a symbolic
   Jacobian, and its use with a SciPy solver.
 
+### Subsequent progress (2026-10-21)
+
+- Added `source-code/pendulum_period.ipynb`, which combines a SymPy derivation,
+  event-based ODE integration with `solve_ivp`, and numerical quadrature with
+  `integrate.quad`, including interpretation of the reported error estimate.
+- Added `source-code/numpy/multidimensional_root_finding.ipynb`.  Together
+  with the existing scalar root-finding exercise, the material now covers
+  scalar and multidimensional root finding.  The notebook also demonstrates
+  result-object inspection, residual-based validation, sensitivity to initial
+  guesses, failure handling, basins of attraction, and a comparison of the
+  default `hybr` method with `lm`.
+
 ### Remaining issues found during the audit
 
 - `source-code/vpython/pendulum.ipynb` still uses
@@ -177,16 +189,21 @@ Use the following schedule as the target, including the break:
 - [ ] Expand the section beyond SVD, basic regression, one optimizer, an ODE,
   and signal filtering.
 - [ ] Add concise examples of:
-  - [ ] numerical quadrature with `integrate.quad`;
-  - [ ] scalar and multidimensional root finding;
+  - [x] numerical quadrature with `integrate.quad`;
+  - [x] scalar and multidimensional root finding;
   - [ ] interpolation;
   - [ ] `minimize`, `least_squares`, and `curve_fit`;
   - [x] ODE integration with `solve_ivp`;
   - [ ] statistical distributions and selected hypothesis tests;
   - [ ] sparse arrays and sparse solvers;
   - [ ] selected special functions.
-- [ ] Teach how to inspect SciPy result objects, convergence status, warnings,
-  and error estimates.
+- [ ] Teach how to inspect SciPy result objects and diagnostics:
+  - [x] inspect result objects and convergence status;
+  - [x] validate root-finding results using residuals rather than relying on
+    the solver's `success` flag alone;
+  - [x] interpret the error estimate returned by `integrate.quad`;
+  - [ ] cover warnings and method-specific diagnostic or error information
+    more broadly.
 - [ ] Include a scientific fitting example with weighted observations,
   parameter covariance, residuals, and uncertainty estimates.
 - [ ] Clarify the difference between scientific parameter estimation and the
