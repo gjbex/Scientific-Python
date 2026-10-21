@@ -30,6 +30,8 @@ algorithms for scientific computing (Lapack, statistics,...).
 1. `indexing_arrays.ipynb`: indexing using `...`, `np.newaxis`
 1. `structured_arrays.ipynb`: Jupyter notebook illustration creating of and
    working with structured numpy arrays.
+1. `multidimensional_root_finding.ipynb`: tutorial on solving and validating a
+   nonlinear system with `scipy.optimize.root`.
 1. `optimization.py`: illustration of how to use the `scipy.optimize` for
     unconstrained multivariate optimization
 1. `target_function_plot.py`: script that creates a surface plot of the
