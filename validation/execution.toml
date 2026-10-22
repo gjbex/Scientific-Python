@@ -1,0 +1,120 @@
+schema_version = 1
+
+[policy]
+platform = "linux-64"
+noninteractive_backend = "Agg"
+required_budget_seconds = 720
+
+[profiles.smoke]
+description = "Four-notebook pilot from VALIDATION_DESIGN.md"
+notebook_ids = [
+  "source-code-matplotlib-multiple-plots",
+  "source-code-numpy-axes",
+  "source-code-numpy-multidimensional-root-finding",
+  "source-code-pendulum-period",
+]
+
+[profiles.required]
+description = "All notebooks classified as required in validation/manifest.toml"
+notebook_ids = [
+  "source-code-hdf5-h5py",
+  "source-code-matplotlib-multiple-plots",
+  "source-code-numpy-axes",
+  "source-code-numpy-broadcast",
+  "source-code-numpy-diffusion",
+  "source-code-numpy-einsum",
+  "source-code-numpy-fft-experiments",
+  "source-code-numpy-indexing-arrays",
+  "source-code-numpy-io-performance",
+  "source-code-numpy-multidimensional-root-finding",
+  "source-code-numpy-numpy",
+  "source-code-numpy-numpy-datatypes",
+  "source-code-numpy-numpy-linear-algebra",
+  "source-code-numpy-structured-arrays",
+  "source-code-numpy-to-numpy-or-not-to-numpy",
+  "source-code-numpy-views",
+  "source-code-pendulum-period",
+  "source-code-sympy-sympy",
+  "source-code-xarray-xarray-intro",
+]
+
+[[notebooks]]
+id = "source-code-hdf5-h5py"
+timeout_seconds = 180
+
+[[notebooks]]
+id = "source-code-matplotlib-multiple-plots"
+timeout_seconds = 90
+artifacts = [
+  { path = "multiple_plots.png", kind = "generated_file", validator = "png", minimum_bytes = 1000 },
+]
+
+[[notebooks]]
+id = "source-code-numpy-axes"
+timeout_seconds = 90
+
+[[notebooks]]
+id = "source-code-numpy-broadcast"
+timeout_seconds = 120
+
+[[notebooks]]
+id = "source-code-numpy-diffusion"
+timeout_seconds = 360
+
+[[notebooks]]
+id = "source-code-numpy-einsum"
+timeout_seconds = 120
+
+[[notebooks]]
+id = "source-code-numpy-fft-experiments"
+timeout_seconds = 180
+
+[[notebooks]]
+id = "source-code-numpy-indexing-arrays"
+timeout_seconds = 120
+
+[[notebooks]]
+id = "source-code-numpy-io-performance"
+timeout_seconds = 360
+
+[[notebooks]]
+id = "source-code-numpy-multidimensional-root-finding"
+timeout_seconds = 360
+assertions = ["root-residuals"]
+
+[[notebooks]]
+id = "source-code-numpy-numpy"
+timeout_seconds = 360
+
+[[notebooks]]
+id = "source-code-numpy-numpy-datatypes"
+timeout_seconds = 180
+
+[[notebooks]]
+id = "source-code-numpy-numpy-linear-algebra"
+timeout_seconds = 180
+
+[[notebooks]]
+id = "source-code-numpy-structured-arrays"
+timeout_seconds = 180
+
+[[notebooks]]
+id = "source-code-numpy-to-numpy-or-not-to-numpy"
+timeout_seconds = 360
+
+[[notebooks]]
+id = "source-code-numpy-views"
+timeout_seconds = 120
+
+[[notebooks]]
+id = "source-code-pendulum-period"
+timeout_seconds = 240
+assertions = ["pendulum-route-agreement"]
+
+[[notebooks]]
+id = "source-code-sympy-sympy"
+timeout_seconds = 360
+
+[[notebooks]]
+id = "source-code-xarray-xarray-intro"
+timeout_seconds = 180

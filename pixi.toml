@@ -6,12 +6,17 @@ platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
 [tasks]
 lab = "jupyter lab source-code"
 notebook = "jupyter notebook source-code"
+validation-contract = "python -B -m unittest validation/test_validation.py"
+validation-smoke = "python -B validation/run_validation.py run --profile smoke"
+validation-required = "python -B validation/run_validation.py run --profile required"
 
 [dependencies]
 python = ">=3.10,<3.13"
 jupyterlab = "*"
 ipywidgets = "*"
 jupyterlab_widgets = "*"
+nbclient = "*"
+nbformat = "*"
 numpy = "*"
 scipy = "*"
 matplotlib = "*"
