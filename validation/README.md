@@ -77,10 +77,13 @@ remain diagnosable without writing outputs back into instructional material.
 
 ## Current pilot result
 
-The 2026-10-21 required-profile pilot accounted for all 47 manifest entries
-and attempted all 19 required notebooks. Fifteen passed and four produced
-actionable execution errors:
+The 2026-10-22 final clean-checkout required-profile pilot accounted for all 47
+manifest entries and attempted all 19 required notebooks. Fourteen passed and
+five produced actionable execution errors:
 
+- `source-code-numpy-broadcast` exceeded its 120-second total timeout; its
+  repeated `%timeit` cells make its runtime too large and variable for the
+  required profile in its current form;
 - `source-code-numpy-fft-experiments` declares an unavailable historical
   `conda-env-py35-py` kernel;
 - `source-code-numpy-io-performance` is assigned to `default` but imports
@@ -91,8 +94,11 @@ actionable execution errors:
 
 These findings are not suppressed or reclassified as passes. Fixing notebook
 content or changing a reviewed manifest environment is a separate maintainer
-decision. The run completed in 463.726 seconds, below the provisional
-720-second budget. The four-notebook smoke profile passed in 29.135 seconds.
+decision. The final clean run completed in 292.301 seconds, below the
+provisional 720-second budget. The four-notebook smoke profile passed in
+29.135 seconds. An earlier clean run exposed that nbclient's `timeout` applies
+per cell rather than to the whole notebook; the runner and reusable scaffold
+now enforce the declared timeout across total notebook execution.
 
 ## Profiles and maintenance
 

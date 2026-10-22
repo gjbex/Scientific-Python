@@ -13,7 +13,7 @@ Date: 2026-10-21
 The repository-owned implementation is documented in
 `validation/README.md`. The initial Linux runs account for all 47 manifest
 entries: the four-notebook smoke profile passes, while the full required
-profile reports 15 passes and four actionable execution errors. This is an
+profile reports 14 passes and five actionable execution errors. This is an
 honest maintenance baseline, not a claim that all required material is
 currently healthy. Activation of the workflow draft and the delivery-tag
 baseline remain pending.

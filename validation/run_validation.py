@@ -13,6 +13,7 @@ import json
 import os
 import platform
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
@@ -37,6 +38,10 @@ RUNNER_VERSION = "1"
 
 class ValidationError(RuntimeError):
     """Raised for unsafe or inconsistent validation configuration."""
+
+
+class NotebookTimeoutError(ValidationError):
+    """Raised when a notebook exceeds its total execution deadline."""
 
 
 @dataclass(frozen=True)
@@ -415,6 +420,16 @@ def execute_entry(
         if any(check["outcome"] == "fail" for check in checks):
             outcome = "fail"
             reason_code = "declared_check_failed"
+    except NotebookTimeoutError as error:
+        outcome = "error"
+        reason_code = "notebook_timeout"
+        checks.append(
+            {
+                "name": "notebook_execution",
+                "outcome": "error",
+                "message": str(error),
+            }
+        )
     except Exception as error:  # noqa: BLE001 - runner errors are result evidence
         outcome = "error"
         reason_code = "notebook_execution_error"
@@ -477,16 +492,35 @@ def execute_notebook(
         )
     client = NotebookClient(
         notebook,
-        timeout=timeout,
+        timeout=None,
         resources={"metadata": {"path": str(path.parent)}},
     )
     try:
-        client.execute()
+        with notebook_deadline(timeout):
+            client.execute()
     finally:
         if executed_path is not None:
             executed_path.parent.mkdir(parents=True, exist_ok=True)
             nbformat.write(notebook, executed_path)
     return notebook
+
+
+@contextmanager
+def notebook_deadline(timeout: int) -> Iterator[None]:
+    def deadline_exceeded(_signum: int, _frame: Any) -> None:
+        raise NotebookTimeoutError(
+            f"notebook exceeded its {timeout}-second total execution timeout"
+        )
+
+    previous_handler = signal.signal(signal.SIGALRM, deadline_exceeded)
+    previous_timer = signal.setitimer(signal.ITIMER_REAL, timeout)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous_handler)
+        if previous_timer[0] > 0:
+            signal.setitimer(signal.ITIMER_REAL, *previous_timer)
 
 
 def collect_declared_artifacts(

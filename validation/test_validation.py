@@ -11,6 +11,7 @@ from nbclient.exceptions import CellExecutionError
 
 from validation.assertions import parse_assertion_records
 from validation.run_validation import (
+    NotebookTimeoutError,
     ValidationError,
     execute_entry,
     execute_notebook,
@@ -150,6 +151,29 @@ class AssertionTests(unittest.TestCase):
             retained = nbformat.read(executed, as_version=4)
 
         self.assertIn("RuntimeError", retained.cells[0].outputs[0]["ename"])
+
+    def test_timeout_limits_the_whole_notebook_and_retains_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "slow.ipynb"
+            executed = root / "executed.ipynb"
+            nbformat.write(
+                nbformat.v4.new_notebook(
+                    cells=[
+                        nbformat.v4.new_code_cell(
+                            "import time\ntime.sleep(2)\nprint('too late')"
+                        )
+                    ]
+                ),
+                source,
+            )
+
+            with self.assertRaisesRegex(
+                NotebookTimeoutError, "total execution timeout"
+            ):
+                execute_notebook(source, 1, [], executed)
+
+            self.assertTrue(executed.is_file())
 
 
 class ArtifactAndPathTests(unittest.TestCase):
