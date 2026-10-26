@@ -6,7 +6,7 @@ platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
 [tasks]
 lab = "jupyter lab source-code"
 notebook = "jupyter notebook source-code"
-refresh-notebook-outputs = { cmd = "python -B validation/refresh_notebook_outputs.py", description = "Execute all source notebooks in place, including benchmarks; run in the full environment" }
+refresh-notebook-outputs = { cmd = "python -B validation/refresh_notebook_outputs.py", description = "Execute manifest notebooks and apply their output policies; run in the full environment" }
 validation-contract = "python -B -m unittest validation/test_validation.py"
 validation-smoke = "python -B validation/run_validation.py run --profile smoke"
 validation-required = "python -B validation/run_validation.py run --profile required"

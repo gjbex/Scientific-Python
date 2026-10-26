@@ -27,17 +27,20 @@ repository root:
 pixi run lab
 ```
 
-To execute every notebook from a clean kernel, include cells tagged
-`benchmark`, and replace the committed outputs after each successful notebook,
-use the complete environment:
+To execute every notebook listed in the validation manifest from a clean
+kernel, including cells tagged `benchmark`, and then apply each notebook's
+committed-output policy, use the complete environment:
 
 ```bash
 pixi run -e full refresh-notebook-outputs
 ```
 
-This command excludes Jupyter checkpoint files and stops at the first failing
-notebook. A failing notebook is not overwritten, although notebooks completed
-earlier in the run have already been updated.
+For `preserve_source`, the freshly executed outputs are written back. For
+`strip`, outputs, execution counts, execution-timing metadata, and stored widget
+state are removed after successful execution. Notebooks absent from the
+manifest are left untouched. The command stops at the first failing notebook;
+that notebook is not overwritten, although notebooks completed earlier in the
+run have already been updated.
 
 Examples that need additional packages can be run with a named environment.
 For example, the NetCDF examples can be run either from the repository root:

@@ -1,4 +1,4 @@
-"""Execute every source notebook and write successful outputs back in place."""
+"""Execute manifest notebooks and apply their committed-output policies."""
 
 from __future__ import annotations
 
@@ -7,31 +7,90 @@ import os
 import stat
 import sys
 import tempfile
+import tomllib
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-CHECKPOINT_DIRECTORY = ".ipynb_checkpoints"
+OUTPUT_POLICY_PRESERVE = "preserve_source"
+OUTPUT_POLICY_STRIP = "strip"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_PIXI_ENVIRONMENT = "full"
 SKIP_EXECUTION_TAG = "skip-execution"
+SUPPORTED_OUTPUT_POLICIES = {OUTPUT_POLICY_PRESERVE, OUTPUT_POLICY_STRIP}
+
+
+class RefreshError(RuntimeError):
+    """Raised when the manifest cannot define a safe output-refresh run."""
+
+
+@dataclass(frozen=True)
+class NotebookSpec:
+    path: Path
+    output_policy: str
 
 
 def create_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=Path, default=Path("source-code"))
+    parser.add_argument("--repository", type=Path, default=REPOSITORY_ROOT)
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        default=Path("validation/manifest.toml"),
+    )
     return parser
 
 
-def discover_notebooks(root: Path) -> list[Path]:
-    """Return source notebooks in deterministic order, excluding checkpoints."""
-    return sorted(
-        path
-        for path in root.rglob("*.ipynb")
-        if CHECKPOINT_DIRECTORY not in path.parts
-    )
+def load_notebook_specs(repository: Path, manifest_path: Path) -> list[NotebookSpec]:
+    """Load and validate manifest notebook paths and output policies."""
+    repository = repository.resolve()
+    manifest = tomllib.loads(manifest_path.read_text(encoding="utf-8"))
+    entries = manifest.get("notebooks")
+    if not isinstance(entries, list) or not entries:
+        raise RefreshError("manifest contains no notebook entries")
+
+    specs: list[NotebookSpec] = []
+    seen_paths: set[Path] = set()
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise RefreshError("manifest contains an invalid notebook entry")
+        relative_text = entry.get("path")
+        properties = entry.get("properties")
+        if not isinstance(relative_text, str) or not isinstance(properties, dict):
+            raise RefreshError("manifest notebook entry lacks path or properties")
+        relative = Path(relative_text)
+        if relative.is_absolute() or ".." in relative.parts:
+            raise RefreshError(f"unsafe notebook path in manifest: {relative_text}")
+        if relative.suffix != ".ipynb":
+            raise RefreshError(f"manifest path is not a notebook: {relative_text}")
+        if relative in seen_paths:
+            raise RefreshError(f"duplicate notebook path in manifest: {relative_text}")
+        seen_paths.add(relative)
+
+        output_policy = properties.get("output_policy")
+        if output_policy not in SUPPORTED_OUTPUT_POLICIES:
+            raise RefreshError(
+                f"unsupported output policy for {relative_text}: {output_policy!r}"
+            )
+        path = (repository / relative).resolve()
+        try:
+            path.relative_to(repository)
+        except ValueError as error:
+            raise RefreshError(
+                f"notebook path resolves outside repository: {relative_text}"
+            ) from error
+        if not path.is_file():
+            raise RefreshError(f"manifest notebook does not exist: {relative_text}")
+        specs.append(NotebookSpec(path=path, output_policy=output_policy))
+
+    return sorted(specs, key=lambda spec: spec.path.as_posix())
 
 
-def execute_and_write_notebook(path: Path) -> None:
+def execute_and_write_notebook(path: Path, output_policy: str) -> None:
     """Execute one notebook and replace it atomically after successful completion."""
+    if output_policy not in SUPPORTED_OUTPUT_POLICIES:
+        raise RefreshError(f"unsupported output policy: {output_policy!r}")
+
     import nbformat
     from nbclient import NotebookClient
 
@@ -43,7 +102,21 @@ def execute_and_write_notebook(path: Path) -> None:
         skip_cells_with_tag=SKIP_EXECUTION_TAG,
     )
     client.execute()
+    if output_policy == OUTPUT_POLICY_STRIP:
+        strip_notebook_outputs(notebook)
     write_notebook_atomic(notebook, path, nbformat)
+
+
+def strip_notebook_outputs(notebook: Any) -> None:
+    """Remove code outputs and execution state from an executed notebook."""
+    notebook.metadata.pop("widgets", None)
+    for cell in notebook.cells:
+        if cell.cell_type != "code":
+            continue
+        cell.outputs = []
+        cell.execution_count = None
+        cell.metadata.pop("execution", None)
+        cell.metadata.pop("ExecuteTime", None)
 
 
 def write_notebook_atomic(notebook: Any, path: Path, nbformat_module: Any) -> None:
@@ -65,10 +138,13 @@ def write_notebook_atomic(notebook: Any, path: Path, nbformat_module: Any) -> No
 
 def main(arguments: list[str] | None = None) -> int:
     namespace = create_parser().parse_args(arguments)
-    root = namespace.root.resolve()
-    if not root.is_dir():
-        print(f"error: notebook root is not a directory: {root}", file=sys.stderr)
+    repository = namespace.repository.resolve()
+    if not repository.is_dir():
+        print(f"error: repository is not a directory: {repository}", file=sys.stderr)
         return 2
+    manifest_path = namespace.manifest
+    if not manifest_path.is_absolute():
+        manifest_path = repository / manifest_path
 
     environment = os.environ.get("PIXI_ENVIRONMENT_NAME")
     if environment != REQUIRED_PIXI_ENVIRONMENT:
@@ -79,21 +155,27 @@ def main(arguments: list[str] | None = None) -> int:
         )
         return 2
 
-    notebooks = discover_notebooks(root)
-    if not notebooks:
-        print(f"error: no notebooks found below {root}", file=sys.stderr)
+    try:
+        specs = load_notebook_specs(repository, manifest_path)
+    except (OSError, RefreshError, tomllib.TOMLDecodeError) as error:
+        print(f"error: {error}", file=sys.stderr)
         return 2
 
     os.environ.setdefault("MPLBACKEND", "Agg")
     os.environ["EXEC_BENCHMARKS"] = "1"
-    total = len(notebooks)
-    for index, path in enumerate(notebooks, start=1):
-        print(f"[{index}/{total}] executing {path.relative_to(root)}", flush=True)
+    total = len(specs)
+    for index, spec in enumerate(specs, start=1):
+        relative = spec.path.relative_to(repository)
+        print(
+            f"[{index}/{total}] executing {relative} "
+            f"(outputs: {spec.output_policy})",
+            flush=True,
+        )
         try:
-            execute_and_write_notebook(path)
+            execute_and_write_notebook(spec.path, spec.output_policy)
         except Exception as error:  # noqa: BLE001 - show the failing notebook
             print(
-                f"error: {path} failed: {type(error).__name__}: {error}",
+                f"error: {spec.path} failed: {type(error).__name__}: {error}",
                 file=sys.stderr,
             )
             return 1

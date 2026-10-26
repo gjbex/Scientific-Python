@@ -11,8 +11,10 @@ from nbclient.exceptions import CellExecutionError
 
 from validation.assertions import parse_assertion_records
 from validation.refresh_notebook_outputs import (
-    discover_notebooks,
+    OUTPUT_POLICY_PRESERVE,
+    OUTPUT_POLICY_STRIP,
     execute_and_write_notebook,
+    load_notebook_specs,
 )
 from validation.run_validation import (
     BENCHMARK_CELL_TAG,
@@ -167,7 +169,7 @@ class AssertionTests(unittest.TestCase):
             )
             nbformat.write(notebook, path)
 
-            execute_and_write_notebook(path)
+            execute_and_write_notebook(path, OUTPUT_POLICY_PRESERVE)
             refreshed = nbformat.read(path, as_version=4)
 
         self.assertIsNotNone(refreshed.cells[0].execution_count)
@@ -183,9 +185,43 @@ class AssertionTests(unittest.TestCase):
             original = path.read_bytes()
 
             with self.assertRaises(CellExecutionError):
-                execute_and_write_notebook(path)
+                execute_and_write_notebook(path, OUTPUT_POLICY_PRESERVE)
 
             self.assertEqual(path.read_bytes(), original)
+
+    def test_output_refresh_executes_then_strips_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "exercise.ipynb"
+            notebook = nbformat.v4.new_notebook(
+                cells=[
+                    nbformat.v4.new_code_cell(
+                        "from pathlib import Path\n"
+                        "Path('benchmark-ran').write_text('yes')\n"
+                        "print('discard this output')",
+                        metadata={"tags": [BENCHMARK_CELL_TAG]},
+                    )
+                ],
+                metadata={
+                    "widgets": {
+                        "application/vnd.jupyter.widget-state+json": {
+                            "state": {},
+                            "version_major": 2,
+                            "version_minor": 0,
+                        }
+                    }
+                },
+            )
+            nbformat.write(notebook, path)
+
+            execute_and_write_notebook(path, OUTPUT_POLICY_STRIP)
+            refreshed = nbformat.read(path, as_version=4)
+            self.assertEqual((root / "benchmark-ran").read_text(), "yes")
+            self.assertIsNone(refreshed.cells[0].execution_count)
+            self.assertEqual(refreshed.cells[0].outputs, [])
+            self.assertNotIn("execution", refreshed.cells[0].metadata)
+            self.assertNotIn("ExecuteTime", refreshed.cells[0].metadata)
+            self.assertNotIn("widgets", refreshed.metadata)
 
     def test_temporary_numerical_defect_is_detected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -263,22 +299,28 @@ class AssertionTests(unittest.TestCase):
 
 
 class ArtifactAndPathTests(unittest.TestCase):
-    def test_notebook_discovery_excludes_checkpoints(self) -> None:
+    def test_output_refresh_uses_only_manifest_notebooks(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            nested = root / "nested"
-            checkpoint = nested / ".ipynb_checkpoints"
-            checkpoint.mkdir(parents=True)
-            (root / "z.ipynb").touch()
-            (nested / "a.ipynb").touch()
-            (checkpoint / "ignored.ipynb").touch()
+            source = root / "source-code"
+            source.mkdir()
+            (source / "classified.ipynb").touch()
+            (source / "unclassified.ipynb").touch()
+            manifest = root / "manifest.toml"
+            manifest.write_text(
+                "[[notebooks]]\n"
+                "path = 'source-code/classified.ipynb'\n"
+                "[notebooks.properties]\n"
+                "output_policy = 'strip'\n"
+            )
 
-            discovered = discover_notebooks(root)
+            specs = load_notebook_specs(root, manifest)
 
         self.assertEqual(
-            [path.relative_to(root).as_posix() for path in discovered],
-            ["nested/a.ipynb", "z.ipynb"],
+            [spec.path.relative_to(root).as_posix() for spec in specs],
+            ["source-code/classified.ipynb"],
         )
+        self.assertEqual([spec.output_policy for spec in specs], ["strip"])
 
     def test_png_validator_checks_structure_and_checksum(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
