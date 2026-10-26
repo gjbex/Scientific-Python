@@ -20,7 +20,6 @@ notebook_ids = [
   "source-code-hdf5-h5py",
   "source-code-matplotlib-multiple-plots",
   "source-code-numpy-axes",
-  "source-code-numpy-broadcast",
   "source-code-numpy-diffusion",
   "source-code-numpy-einsum",
   "source-code-numpy-fft-experiments",
