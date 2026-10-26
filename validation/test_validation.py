@@ -10,6 +10,10 @@ import nbformat
 from nbclient.exceptions import CellExecutionError
 
 from validation.assertions import parse_assertion_records
+from validation.refresh_notebook_outputs import (
+    discover_notebooks,
+    execute_and_write_notebook,
+)
 from validation.run_validation import (
     BENCHMARK_CELL_TAG,
     NotebookTimeoutError,
@@ -150,6 +154,39 @@ class AssertionTests(unittest.TestCase):
         self.assertEqual(executed.cells[1].outputs, [])
         self.assertIsNotNone(executed.cells[2].execution_count)
 
+    def test_output_refresh_executes_benchmark_cells(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "benchmark.ipynb"
+            notebook = nbformat.v4.new_notebook(
+                cells=[
+                    nbformat.v4.new_code_cell(
+                        "print('benchmark executed')",
+                        metadata={"tags": [BENCHMARK_CELL_TAG]},
+                    )
+                ]
+            )
+            nbformat.write(notebook, path)
+
+            execute_and_write_notebook(path)
+            refreshed = nbformat.read(path, as_version=4)
+
+        self.assertIsNotNone(refreshed.cells[0].execution_count)
+        self.assertEqual(refreshed.cells[0].outputs[0].text, "benchmark executed\n")
+
+    def test_failed_output_refresh_preserves_source_notebook(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "failure.ipynb"
+            notebook = nbformat.v4.new_notebook(
+                cells=[nbformat.v4.new_code_cell("raise RuntimeError('defect')")]
+            )
+            nbformat.write(notebook, path)
+            original = path.read_bytes()
+
+            with self.assertRaises(CellExecutionError):
+                execute_and_write_notebook(path)
+
+            self.assertEqual(path.read_bytes(), original)
+
     def test_temporary_numerical_defect_is_detected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "defect.ipynb"
@@ -226,6 +263,23 @@ class AssertionTests(unittest.TestCase):
 
 
 class ArtifactAndPathTests(unittest.TestCase):
+    def test_notebook_discovery_excludes_checkpoints(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            nested = root / "nested"
+            checkpoint = nested / ".ipynb_checkpoints"
+            checkpoint.mkdir(parents=True)
+            (root / "z.ipynb").touch()
+            (nested / "a.ipynb").touch()
+            (checkpoint / "ignored.ipynb").touch()
+
+            discovered = discover_notebooks(root)
+
+        self.assertEqual(
+            [path.relative_to(root).as_posix() for path in discovered],
+            ["nested/a.ipynb", "z.ipynb"],
+        )
+
     def test_png_validator_checks_structure_and_checksum(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "figure.png"
