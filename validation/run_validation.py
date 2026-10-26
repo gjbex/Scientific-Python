@@ -33,7 +33,8 @@ except ImportError:
     from assertions import assertion_cell, parse_assertion_records
 
 RUNNER_NAME = "scientific-python-notebook-runner"
-RUNNER_VERSION = "1"
+RUNNER_VERSION = "2"
+BENCHMARK_CELL_TAG = "benchmark"
 
 
 class ValidationError(RuntimeError):
@@ -401,7 +402,10 @@ def execute_entry(
                 {
                     "name": "notebook_execution",
                     "outcome": "pass",
-                    "message": "kernel completed in an isolated repository copy",
+                    "message": (
+                        "kernel completed in an isolated repository copy; "
+                        f"cells tagged {BENCHMARK_CELL_TAG!r} were skipped"
+                    ),
                 }
             )
             assertion_records = parse_assertion_records(
@@ -482,6 +486,7 @@ def execute_notebook(
 
     os.environ.setdefault("MPLBACKEND", "Agg")
     notebook = nbformat.read(path, as_version=4)
+    clear_skipped_execution_state(notebook, BENCHMARK_CELL_TAG)
     source = assertion_cell(assertion_names)
     if source is not None:
         notebook.cells.append(
@@ -494,6 +499,7 @@ def execute_notebook(
         notebook,
         timeout=None,
         resources={"metadata": {"path": str(path.parent)}},
+        skip_cells_with_tag=BENCHMARK_CELL_TAG,
     )
     try:
         with notebook_deadline(timeout):
@@ -503,6 +509,17 @@ def execute_notebook(
             executed_path.parent.mkdir(parents=True, exist_ok=True)
             nbformat.write(notebook, executed_path)
     return notebook
+
+
+def clear_skipped_execution_state(notebook: Any, tag: str) -> None:
+    """Remove stale execution evidence from code cells skipped by validation."""
+    for cell in notebook.cells:
+        if cell.cell_type != "code" or tag not in cell.metadata.get("tags", []):
+            continue
+        cell.outputs = []
+        cell.execution_count = None
+        cell.metadata.pop("execution", None)
+        cell.metadata.pop("ExecuteTime", None)
 
 
 @contextmanager

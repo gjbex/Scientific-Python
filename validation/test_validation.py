@@ -11,8 +11,10 @@ from nbclient.exceptions import CellExecutionError
 
 from validation.assertions import parse_assertion_records
 from validation.run_validation import (
+    BENCHMARK_CELL_TAG,
     NotebookTimeoutError,
     ValidationError,
+    clear_skipped_execution_state,
     execute_entry,
     execute_notebook,
     infrastructure_error_entry,
@@ -101,6 +103,53 @@ class ConfigurationTests(unittest.TestCase):
 
 
 class AssertionTests(unittest.TestCase):
+    def test_skipped_benchmark_state_is_cleared(self) -> None:
+        benchmark = nbformat.v4.new_code_cell(
+            "raise RuntimeError('benchmark must not execute')",
+            execution_count=17,
+            outputs=[nbformat.v4.new_output("stream", name="stdout", text="stale\n")],
+            metadata={
+                "tags": [BENCHMARK_CELL_TAG],
+                "execution": {"iopub.status.busy": "stale"},
+                "ExecuteTime": {"start_time": "stale", "end_time": "stale"},
+            },
+        )
+        notebook = nbformat.v4.new_notebook(cells=[benchmark])
+
+        clear_skipped_execution_state(notebook, BENCHMARK_CELL_TAG)
+
+        self.assertEqual(
+            benchmark.source,
+            "raise RuntimeError('benchmark must not execute')",
+        )
+        self.assertEqual(benchmark.metadata["tags"], [BENCHMARK_CELL_TAG])
+        self.assertEqual(benchmark.outputs, [])
+        self.assertIsNone(benchmark.execution_count)
+        self.assertNotIn("execution", benchmark.metadata)
+        self.assertNotIn("ExecuteTime", benchmark.metadata)
+
+    def test_benchmark_cell_is_skipped_during_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "benchmark.ipynb"
+            notebook = nbformat.v4.new_notebook(
+                cells=[
+                    nbformat.v4.new_code_cell("value = 42"),
+                    nbformat.v4.new_code_cell(
+                        "raise RuntimeError('benchmark must not execute')",
+                        metadata={"tags": [BENCHMARK_CELL_TAG]},
+                    ),
+                    nbformat.v4.new_code_cell("assert value == 42"),
+                ]
+            )
+            nbformat.write(notebook, path)
+
+            executed = execute_notebook(path, 60, [])
+
+        self.assertIsNotNone(executed.cells[0].execution_count)
+        self.assertIsNone(executed.cells[1].execution_count)
+        self.assertEqual(executed.cells[1].outputs, [])
+        self.assertIsNotNone(executed.cells[2].execution_count)
+
     def test_temporary_numerical_defect_is_detected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "defect.ipynb"
