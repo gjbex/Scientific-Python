@@ -41,6 +41,7 @@ pytables = "*"
 
 [feature.xarray.dependencies]
 xarray = "*"
+zarr = ">=3,<4"
 
 [feature.netcdf.dependencies]
 netcdf4 = "*"
