@@ -3,33 +3,41 @@ id = "scientific-python"
 title = "Scientific Python"
 content_language = "en"
 summary = """
-The Python programming language is increasingly popular. It is a versatile language for general purpose programming and accessible for novice programmers. However, it is also increasingly used for applications in the domain of scientific computing. This training introduces modules that are useful in that context.
+This two-part training introduces the core Python tools used in scientific computing. Participants work with multidimensional numerical data, numerical algorithms, visualization, symbolic computation, labeled data, and scientific file formats, and learn to assess numerical reliability and resource use.
 """
 languages = ["Python"]
 
 [[learning_outcomes]]
-statement = "Be able to use numpy to represent and compute with multidimensional arrays."
-competencies = ["numpy.create-slice-and-reshape-arrays", "numpy.vectorized-computations", "numpy.reductions"]
+statement = "Interpret NumPy array shapes, axes, dtypes, views, and copies, and express multidimensional computations using broadcasting, reductions, reshaping, and basic linear algebra."
+competencies = ["numpy.create-slice-and-reshape-arrays", "numpy.vectorized-computations", "numpy.broadcasting", "numpy.reductions", "numpy.basic-linear-algebra"]
 
 [[learning_outcomes]]
-statement = "Have an overview of the scope of scipy."
+statement = "Diagnose numerical reliability and resource risks in NumPy computations, including precision, non-finite values, comparisons, reproducible randomness, memory use, and file I/O."
+competencies = []
+
+[[learning_outcomes]]
+statement = "Select and apply suitable SciPy routines and assess results using solver diagnostics, residuals, or error estimates."
 competencies = ["scientific-python.select-scipy-functionality"]
 
 [[learning_outcomes]]
-statement = "Be able to create data visualizations with matplotlib and bokeh."
-competencies = ["matplotlib.create-basic-plots", "data-science.create-statistical-and-interactive-visualizations"]
+statement = "Create and interpret scientific visualizations with Matplotlib."
+competencies = ["matplotlib.create-basic-plots", "matplotlib.interpret-basic-plots"]
 
 [[learning_outcomes]]
-statement = "Be able to use sympy to do symbolic computations."
+statement = "Use SymPy for symbolic computation and connect symbolic expressions to numerical calculations."
 competencies = ["scientific-python.symbolic-computation"]
 
 [[learning_outcomes]]
-statement = "Be able to represent and manipulate data in HDF5 format."
+statement = "Represent and select labeled multidimensional data with xarray and explain when labels and metadata are preferable to bare NumPy arrays."
+competencies = []
+
+[[learning_outcomes]]
+statement = "Choose a scientific data format based on fidelity, metadata, access pattern, and scale, and perform fundamental HDF5 operations with h5py."
 competencies = ["scientific-python.hdf5-data"]
 
 [[learning_outcomes]]
-statement = "Know how to start on an image or video manipulation project."
-competencies = ["scientific-python.image-and-video-workflows"]                  
+statement = "Integrate NumPy, SciPy, SymPy, and Matplotlib in a scientific investigation and distinguish numerical cross-checking from validation of the scientific model."
+competencies = []
 
 [source]
 metadata_document = "docs/README.md"
@@ -38,23 +46,23 @@ website_url = "https://gjbex.github.io/Scientific-Python/"
 license = "CC-BY-4.0"
 
 [delivery]
-duration_minutes = 240
+duration_minutes = 420
 duration_kind = "fixed"
-session_count = 1
-target_session_duration_minutes = 240
+session_count = 2
+target_session_duration_minutes = 210
 schedule_complete = true
 description = """
-Total duration: 4 hours.
+Seven scheduled hours delivered as two parts of 210 minutes, each including a 15-minute short break. The parts can be scheduled on separate days so participants can practise independently between them. That practice is optional and is not included in the course duration. If both parts are delivered on one day, schedule a one-hour lunch between them; lunch is not included in the seven-hour duration.
 """
 
 [audience]
 description = """
-This training is for you if you need to use Python for scientific computing.
+This training is for researchers and technical users who already know basic Python and want to apply it to numerical computation, scientific data, visualization, and reproducible analysis.
 """
 
 [prerequisites]
 summary = """
-You will need experience programming in Python. This is not a training that starts from scratch. If you plan to do Python programming in a Linux or HPC environment you should be familiar with these as well. More concretely, participants should already be comfortable with the following: * running Python code in Jupyter or from the command line; * variables, numbers, strings, booleans, and basic containers such as lists and dictionaries; * `if`/`else` statements and `for` loops; * writing and calling simple functions with arguments and a return value; * indexing and slicing sequences; * importing modules and calling functions from them; * reading short Python scripts without needing every line explained. You do not need prior experience with NumPy, SciPy, SymPy, HDF5, or image processing. Those are part of the training itself.
+You will need experience programming in Python. This is not a training that starts from scratch. If you plan to do Python programming in a Linux or HPC environment, you should be familiar with that environment as well. More concretely, participants should already be comfortable with the following: * running Python code in Jupyter or from the command line; * variables, numbers, strings, booleans, and basic containers such as lists and dictionaries; * `if`/`else` statements and `for` loops; * writing and calling simple functions with arguments and a return value; * indexing and slicing sequences; * importing modules and calling functions from them; * reading short Python scripts without needing every line explained. You do not need prior experience with NumPy, SciPy, Matplotlib, SymPy, xarray, or HDF5. Those are taught in the training.
 """
 competencies = ["python.run-code", "python.values-and-containers", "python.control-flow-and-comprehensions", "python.functions", "python.index-and-slice-sequences", "python.import-modules"]
 
@@ -76,9 +84,8 @@ tasks = [
 [requirements]
 software = [
   "Laptop or desktop with internet access.",
-  "A system set up so you can connect to an HPC system, an account on an HPC system (e.g., VSC, CECI, ...), compute credits if that is required to run jobs on the HPC system if you want to use an HPC system.",
-  "A Python environment that can run Jupyter Lab if you want to use your own system.",
-  "Access to Google Colaboratory if you prefer not to install software."
+  "A Python environment that can run JupyterLab, or access to Google Colaboratory.",
+  "Optional: access to a Linux or HPC system if you want to adapt the I/O examples to that environment."
 ]
 
 [level]
@@ -111,41 +118,66 @@ email = "geertjan.bex@uhasselt.be"
 
 [[sessions]]
 id = "session-1"
-title = "Session one"
-duration_minutes = 240
+title = "Part 1 — Numerical foundations"
+duration_minutes = 210
 
 [[sessions.items]]
-subject = "introduction and motivation"
-duration_minutes = 5
-
-[[sessions.items]]
-subject = "numpy"
-duration_minutes = 80
-
-[[sessions.items]]
-subject = "scipy"
-duration_minutes = 25
-
-[[sessions.items]]
-subject = "coffee break"
+subject = "Objectives, logistics, and ecosystem boundaries"
 duration_minutes = 10
 
 [[sessions.items]]
-subject = "matplotlib & bokeh"
-duration_minutes = 30
+subject = "NumPy block 1: array model"
+duration_minutes = 45
 
 [[sessions.items]]
-subject = "sympy"
+subject = "NumPy block 2: multidimensional computation"
+duration_minutes = 45
+
+[[sessions.items]]
+subject = "Short break"
+duration_minutes = 15
+
+[[sessions.items]]
+subject = "NumPy block 3: reliability, performance, and I/O"
+duration_minutes = 45
+
+[[sessions.items]]
+subject = "SciPy numerical workflows"
+duration_minutes = 50
+
+[[sessions]]
+id = "session-2"
+title = "Part 2 — Interpretation, scientific data, and integration"
+duration_minutes = 210
+
+[[sessions.items]]
+subject = "Recap and questions arising from Part 1 practice"
+duration_minutes = 15
+
+[[sessions.items]]
+subject = "Matplotlib"
+duration_minutes = 35
+
+[[sessions.items]]
+subject = "SymPy and symbolic-to-numerical work"
 duration_minutes = 25
 
 [[sessions.items]]
-subject = "HDF5"
+subject = "Short break"
+duration_minutes = 15
+
+[[sessions.items]]
+subject = "xarray core"
 duration_minutes = 40
 
 [[sessions.items]]
-subject = "scikit-image & OpenCV"
-duration_minutes = 20
+subject = "Scientific formats and h5py fundamentals"
+duration_minutes = 25
 
 [[sessions.items]]
-subject = "wrap up"
-duration_minutes = 5
+subject = "Integrated instructor-led pendulum investigation"
+duration_minutes = 45
+
+[[sessions.items]]
+subject = "Synthesis, limitations, and related training"
+duration_minutes = 10

@@ -1,38 +1,70 @@
-The Python programming language is increasingly popular.  It is a
-versatile language for general purpose programming and accessible
-for novice programmers.  However, it is also increasingly used for
-applications in the domain of scientific computing.
-This training introduces modules that are useful in that context.
+This two-part training introduces the core Python tools used in scientific
+computing.  It is intended for participants who already have basic Python
+programming experience and want to work with numerical algorithms,
+multidimensional data, visualization, symbolic computation, and scientific
+file formats.
 
 
 ## Learning outcomes
 
-When you complete this training you will
+When you complete this training, you will be able to
 
-  * be able to use numpy to represent and compute with multidimensional
-    arrays;
-  * have an overview of the scope of scipy;
-  * be able to create data visualizations with matplotlib and bokeh;
-  * be able to use sympy to do symbolic computations;
-  * be able to represent and manipulate data in HDF5 format;
-  * know how to start on an image or video manipulation project.
+* interpret NumPy array shapes, axes, dtypes, views, and copies, and express
+  multidimensional computations using broadcasting, reductions, reshaping,
+  and basic linear algebra;
+* diagnose common numerical-reliability and resource risks involving
+  precision, non-finite values, comparisons, randomness, memory use, and I/O;
+* select suitable SciPy routines and assess their results using diagnostics,
+  residuals, or error estimates;
+* create and interpret scientific visualizations with Matplotlib;
+* connect symbolic SymPy expressions to numerical calculations;
+* represent and select labeled multidimensional data with xarray;
+* choose a scientific data format based on fidelity, metadata, access pattern,
+  and scale, and perform fundamental HDF5 operations with h5py;
+* combine these tools in a scientific investigation and distinguish numerical
+  cross-checking from validation of the scientific model.
 
 
 ## Schedule
 
-Total duration: 4 hours.
+The training has a **seven-hour scheduled duration**, delivered as two parts of
+3.5 hours.  Each part includes one 15-minute short break.
 
-  | Subject                                     | Duration |
-  |---------------------------------------------|----------|
-  | introduction and motivation                 |  5 min.  |
-  | numpy                                       | 80 min.  |
-  | scipy                                       | 25 min.  |
-  | coffee break                                | 10 min.  |
-  | matplotlib & bokeh                          | 30 min.  |
-  | sympy                                       | 25 min.  |
-  | HDF5                                        | 40 min.  |
-  | scikit-image & OpenCV                       | 20 min.  |
-  | wrap up                                     | 10 min.  |
+The parts can be scheduled on separate days.  Participants are encouraged to
+practise and work on exercises between them; this independent work is optional
+and is not included in the seven-hour duration.  Part 2 starts with a recap and
+questions arising from that practice, but does not require participants to have
+completed the exercises.
+
+If both parts are delivered on one day, schedule a one-hour lunch between them.
+Lunch is not included in the course duration, so the total elapsed time is eight
+hours.
+
+### Part 1 — Numerical foundations
+
+| Subject | Duration |
+|---|---:|
+| Objectives, logistics, and ecosystem boundaries | 10 min |
+| NumPy block 1: array model | 45 min |
+| NumPy block 2: multidimensional computation | 45 min |
+| Short break | 15 min |
+| NumPy block 3: reliability, performance, and I/O | 45 min |
+| SciPy numerical workflows | 50 min |
+| **Part 1 total** | **210 min** |
+
+### Part 2 — Interpretation, scientific data, and integration
+
+| Subject | Duration |
+|---|---:|
+| Recap and questions arising from Part 1 practice | 15 min |
+| Matplotlib | 35 min |
+| SymPy and symbolic-to-numerical work | 25 min |
+| Short break | 15 min |
+| xarray core | 40 min |
+| Scientific formats and h5py fundamentals | 25 min |
+| Integrated instructor-led pendulum investigation | 45 min |
+| Synthesis, limitations, and related training | 10 min |
+| **Part 2 total** | **210 min** |
 
 
 ## Training materials
@@ -44,8 +76,9 @@ as well as example code and hands-on material.
 
 ## Target audience
 
-This training is for you if you need to use Python for scientific
-computing.
+This training is for researchers and technical users who already know basic
+Python and want to apply it to numerical computation, scientific data,
+visualization, and reproducible analysis.
 
 
 ## Prerequisites
@@ -66,8 +99,8 @@ More concretely, participants should already be comfortable with the following:
 * importing modules and calling functions from them;
 * reading short Python scripts without needing every line explained.
 
-You do not need prior experience with NumPy, SciPy, SymPy, HDF5, or image processing.
-Those are part of the training itself.
+You do not need prior experience with NumPy, SciPy, Matplotlib, SymPy, xarray,
+or HDF5.  Those are taught in the training.
 
 ### Quick self-assessment
 
@@ -86,13 +119,14 @@ If several of these items still feel difficult, the training will probably move 
 
 ### Software and access requirements
 
-For following along hands-on, you need
-* laptop or desktop with internet access.
-* a system set up so you can connect to an HPC system, an account on an HPC
-  system (e.g., VSC, CECI, ...), compute credits if that is required to run
-  jobs on the HPC system if you want to use an HPC system;
-* a Python environment that can run Jupyter Lab if you want to use your own system;
-* access to Google Colaboratory if you prefer not to install software.
+To follow along, you need
+
+* a laptop or desktop with internet access;
+* a Python environment that can run JupyterLab, or access to Google
+  Colaboratory.
+
+An account on a Linux or HPC system is not required.  Access to one is useful
+if you want to adapt the I/O examples to that environment.
 
 
 ## Level of the Material
