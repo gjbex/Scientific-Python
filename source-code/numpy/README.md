@@ -25,6 +25,26 @@ algorithms for scientific computing (Lapack, statistics,...).
 1. `logistic_map.ipynb`: analysis and visualization of the logistic map.
 1. `numeexpr.ipynb`: Jupyter notebook illustrating some use cases of the
     numexpr module.
+1. `numpy_array_model.ipynb`: concise, instructor-led introduction to the
+    NumPy array model, shape and axes, indexing, views, and copies. It reads
+    the small tracked reference fixture `temperature_grid.npy`, whose axes are
+    `(time, y, x)`, whose values are temperatures in degrees Celsius, and whose
+    time positions represent 06:00 and 12:00. Regenerate the fixtures with
+    `pixi run python source-code/numpy/generate_temperature_grid.py`.
+1. `numpy_multidimensional_computation.ipynb`: instructor-led continuation on
+    element-wise operations, broadcasting, reductions, shape transformations,
+    array combination, and a small coupled-measurement linear system, with an
+    optional step-by-step spatial least-squares extension.
+1. `numpy_reliable_computation.ipynb`: instructor-led third block on integer
+    overflow, floating-point precision, non-finite values, tolerance-based
+    comparisons, reproducible random streams, and estimating the memory cost of
+    vectorized and broadcast computations. It also covers text import, NumPy
+    binary formats, memory mapping, and HPC I/O decisions.
+1. `temperature_morning.csv`: tracked text export of the 06:00 `(y, x)` slice,
+    used to demonstrate text import and schema validation.
+1. `generate_temperature_grid.py`: deterministic generator for
+    `temperature_grid.npy` and `temperature_morning.csv`; its broadcasting is
+    suitable for discussion after the introductory array-model block.
 1. `numpy.ipynb`: Jupyter notebook illustrating some numpy aspects like
     array slicing, adding dimension to arrays, and so on.
 1. `indexing_arrays.ipynb`: indexing using `...`, `np.newaxis`
