@@ -79,7 +79,9 @@ algorithms for scientific computing (Lapack, statistics,...).
    for various tasks.
 1. `numpy_linear_algebra.ipynb`: Jupyter notebook illustrating the use of
    linear algebra in numpy.
-
+1. `quantum_harmonic_oscillator_numeric.ipynb`: Jupyter notebook illustrating
+   the numerical solution of the quantum harmonic oscillator using numpy, scipy
+   and findiff.
 
 ## Pendulum
 
