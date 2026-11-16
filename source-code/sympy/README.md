@@ -18,4 +18,7 @@ Some simple sympy examples.
 1. `triangles.ipynb`: Jupyter notebook illustrating the probability of
    constructing triangles from cutting a rope.
 1. `plotting`: illustration of using alternative backends for plots in sympy.
+1. `quantum_harmonic_oscillator_algebraic.ipynb`: Jupyter notebook illustrating
+   the algebraic solution of the quantum harmonic oscillator, using the raising
+   and lowering operators.
 1. `img`: images for notebooks.
